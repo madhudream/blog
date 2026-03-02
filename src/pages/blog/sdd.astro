@@ -1,0 +1,54 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'fs';
+import path from 'path';
+import { marked } from 'marked';
+
+// Read the markdown content
+const contentPath = path.join(process.cwd(), 'content', 'sdd.md');
+const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+
+// Extract content after the first heading and table of contents
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="big-picture">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots: string[] = [];
+
+const tocItems = [
+  { id: 'big-picture', label: 'The Big Picture' },
+  { id: 'what-is-sdd', label: 'What is Spec-Driven Development' },
+  { id: 'spec-kit', label: 'The Spec-Kit Methodology' },
+  { id: 'the-good', label: 'The Good: Massive Productivity Gains' },
+  { id: 'challenges', label: 'The Challenges: Model Fatigue & Limitations' },
+  { id: 'when-works', label: 'When It Works, When It Fails' },
+  { id: 'metrics', label: 'Real Metrics from ContentFlow' },
+  { id: 'workflow', label: 'The Workflow in Practice' },
+  { id: 'learnings', label: 'Learnings & Best Practices' },
+  { id: 'pros-cons', label: 'Pros & Cons: The Honest Truth' },
+  { id: 'recommendations', label: 'Recommendations' },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+];
+---
+
+<BlogPost
+  title="Spec-Driven Development: Building ContentFlow CMS in 2 Days with AI"
+  date="March 2, 2026"
+  readTime="12 min read"
+  category="AI Development"
+  emoji="📋"
+  description="How I built an entire CMS—SDK, portal, server, deployment—in 32 hours by treating specifications as the primary artifact and letting AI handle 90% of the implementation."
+  screenshots={screenshots}
+  tocItems={tocItems}
+>
+  <Fragment set:html={content} />
+</BlogPost>

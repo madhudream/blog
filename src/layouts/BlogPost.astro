@@ -1,0 +1,304 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  date: string;
+  readTime: string;
+  category: string;
+  emoji: string;
+  description: string;
+  screenshots: string[];
+  tocItems: Array<{ id: string; label: string }>;
+  appLink?: string;
+}
+
+const { title, date, readTime, category, emoji, description, screenshots, tocItems, appLink } = Astro.props;
+---
+
+<Layout title={`${title} - Madhu's Dream`}>
+  <div class="pt-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex gap-8">
+      <!-- Table of Contents Sidebar -->
+      <aside class="hidden lg:block w-64 flex-shrink-0">
+        <div 
+          class="sticky top-24 rounded-2xl p-6 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h3 class="font-bold mb-4 text-sm uppercase tracking-wider" style="color: var(--theme-text-primary);">
+            Table of Contents
+          </h3>
+          <nav class="space-y-2">
+            {tocItems.map(item => (
+              <a 
+                href={`#${item.id}`}
+                class="block text-sm py-1 transition-colors toc-link"
+                style="color: var(--theme-text-secondary);"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Article Content -->
+      <article class="flex-1 max-w-4xl">
+        <div class="mb-8">
+          <a 
+            href="/" 
+            class="inline-flex items-center font-medium mb-8 transition-colors hover-link"
+            style="color: var(--theme-text-secondary);"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </a>
+        </div>
+
+        <!-- Header -->
+        <header class="mb-12">
+          <div class="text-6xl mb-6">{emoji}</div>
+          <div class="flex items-center gap-4 mb-6 flex-wrap">
+            <span 
+              class="px-4 py-2 text-white rounded-full text-sm font-medium"
+              style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+            >
+              {category}
+            </span>
+            <time style="color: var(--theme-text-tertiary);">{date}</time>
+            <span style="color: var(--theme-text-tertiary);">• {readTime}</span>
+          </div>
+          
+          <h1 
+            class="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+            style="color: var(--theme-text-primary);"
+          >
+            {title}
+          </h1>
+          
+          <p class="text-xl leading-relaxed" style="color: var(--theme-text-secondary);">
+            {description}
+          </p>
+        </header>
+
+        <!-- Try it out - Top -->
+        {appLink && (
+          <div class="mb-12">
+            <div 
+              class="rounded-2xl p-8 border text-center"
+              style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+            >
+              <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">
+                Try it out
+              </h2>
+              <p class="text-lg mb-6" style="color: var(--theme-text-secondary);">
+                See screenshots in an interactive carousel, explore features, and learn more about the app.
+              </p>
+              <a 
+                href={appLink}
+                class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold transition-all hover:scale-105"
+                style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                Explore App
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- Markdown Content -->
+        <div class="prose-blog">
+          <slot />
+        </div>
+
+        <!-- Try it out - Bottom -->
+        {appLink && (
+          <div class="mt-16 mb-12">
+            <div 
+              class="rounded-2xl p-8 border text-center"
+              style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+            >
+              <h2 class="text-2xl font-bold mb-4" style="color: var(--theme-text-primary);">
+                Try it out
+              </h2>
+              <p class="text-lg mb-6" style="color: var(--theme-text-secondary);">
+                See screenshots in an interactive carousel, explore features, and learn more about the app.
+              </p>
+              <a 
+                href={appLink}
+                class="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold transition-all hover:scale-105"
+                style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                Explore App
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- Navigation -->
+        <div 
+          class="mt-16 pt-8 border-t flex justify-between"
+          style="border-color: var(--theme-card-border);"
+        >
+          <a 
+            href="/" 
+            class="inline-flex items-center font-medium transition-colors hover-link"
+            style="color: var(--theme-text-secondary);"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .hover-link:hover {
+    color: var(--theme-primary-from);
+  }
+
+  .toc-link:hover {
+    color: var(--theme-primary-from);
+  }
+
+  /* Blog post specific prose styling */
+  .prose-blog {
+    color: var(--theme-text-secondary);
+  }
+
+  .prose-blog h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text-primary);
+  }
+
+  .prose-blog h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--theme-text-primary);
+  }
+
+  .prose-blog h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--theme-text-primary);
+  }
+
+  .prose-blog p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+  }
+
+  .prose-blog ul,
+  .prose-blog ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-blog li {
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+  }
+
+  .prose-blog strong {
+    color: var(--theme-text-primary);
+    font-weight: 600;
+  }
+
+  .prose-blog a {
+    color: var(--theme-primary-from);
+    text-decoration: underline;
+  }
+
+  .prose-blog a:hover {
+    color: var(--theme-secondary-from);
+  }
+
+  .prose-blog code {
+    background: var(--theme-card-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--theme-card-border);
+  }
+
+  .prose-blog pre {
+    background: var(--theme-card-bg);
+    border: 1px solid var(--theme-card-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .prose-blog pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .prose-blog table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 1px solid var(--theme-card-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .prose-blog th {
+    background: var(--theme-card-bg);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--theme-text-primary);
+    border-bottom: 2px solid var(--theme-card-border);
+  }
+
+  .prose-blog td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--theme-card-border);
+  }
+
+  .prose-blog tr:last-child td {
+    border-bottom: none;
+  }
+
+  .prose-blog blockquote {
+    border-left: 4px solid var(--theme-primary-from);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--theme-text-tertiary);
+  }
+
+  .prose-blog hr {
+    border: none;
+    border-top: 2px solid var(--theme-card-border);
+    margin: 3rem 0;
+  }
+
+  /* Section styling */
+  .prose-blog section {
+    margin-bottom: 3rem;
+  }
+</style>

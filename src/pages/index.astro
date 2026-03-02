@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import BlogCard from '../components/BlogCard.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+const blogPosts = [
+  {
+    id: 'contentflow-cms',
+    title: 'Building ContentFlow CMS in 2 Days with AI',
+    excerpt: 'How I built an entire content management system using Level 4 AI development—SDK, CMS, server, and deployment—in just 32 hours.',
+    date: 'March 2, 2026',
+    readTime: '12 min read',
+    category: 'AI Development',
+    image: '/contentflow/image1.png',
+    link: '/blog/contentflow-cms',
+  },
+  {
+    id: 'sdd',
+    title: 'Spec-Driven Development: Building with AI',
+    excerpt: 'The methodology behind building ContentFlow CMS in 32 hours. Learn how treating specifications as the primary artifact enables 3-10x productivity gains.',
+    date: 'March 2, 2026',
+    readTime: '12 min read',
+    category: 'AI Development',
+    image: '/contentflow/image2.png',
+    link: '/blog/sdd',
+  },
+  {
+    id: 'wordstash',
+    title: 'WordStash: Your Personal Vocabulary Companion',
+    excerpt: 'Building a dead-simple iOS app for capturing and learning new words. From idea to App Store in one day.',
+    date: 'February 28, 2026',
+    readTime: '6 min read',
+    category: 'iOS Development',
+    image: '/wordstash/image1.png',
+    link: '/blog/wordstash',
+  },
+  {
+    id: 'optionmantra',
+    title: 'VIX Data Pipeline: A Practical Build',
+    excerpt: 'Creating a reliable system to track VIX at 5-minute resolution, blending Yahoo Finance with Tastytrade live data.',
+    date: 'February 27, 2026',
+    readTime: '8 min read',
+    category: 'Data Engineering',
+    image: '/wordstash/image2.png',
+    link: '/blog/optionmantra',
+  },
+];
+---
+
+<Layout title="Madhu's Dream - Building 100+ Apps">
+  <div class="pt-16">
+    <!-- Hero Section -->
+    <Hero published={4} inProgress={1} goal={100} />
+
+    <!-- Main Content with Sidebar -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex gap-12">
+        <!-- Main Blog Content -->
+        <div class="flex-1">
+          <div class="mb-14">
+            <h2 class="text-5xl font-bold mb-3" style="color: var(--theme-text-primary);">Latest Stories</h2>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">Insights from building apps with AI-driven development</p>
+          </div>
+
+          <div class="space-y-10">
+            {blogPosts.map((post, index) => (
+              <BlogCard {...post} index={index} />
+            ))}
+          </div>
+
+          <!-- About Section -->
+          <div 
+            class="mt-20 rounded-3xl p-12 border shadow-xl relative overflow-hidden"
+            style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3)); border-color: var(--theme-card-border);"
+          >
+            <div class="absolute inset-0 opacity-30" style="background: var(--theme-card-bg);"></div>
+            <div class="relative">
+              <h3 class="text-4xl font-bold mb-6" style="color: var(--theme-text-primary);">My Journey</h3>
+              <p class="text-lg leading-relaxed mb-5 font-serif" style="color: var(--theme-text-secondary);">
+                After 20 years in the U.S., I have countless stories to share. Recently, during a 5-day hospital stay, 
+                I built 2 complete apps using AI-driven development. This is my mission to create 100+ apps and 
+                document the journey—sharing lessons, failures, and victories along the way.
+              </p>
+              <p 
+                class="italic text-xl font-serif border-l-4 pl-6 py-2 rounded-r-xl"
+                style="color: var(--theme-text-primary); border-color: var(--theme-primary-from); background: var(--theme-card-bg);"
+              >
+                "Every app is a story. Every story is a lesson. Every lesson is a legacy."
+              </p>
+              <div class="mt-8">
+                <a 
+                  href="/apps" 
+                  class="inline-flex items-center px-8 py-4 text-white rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all"
+                  style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from));"
+                >
+                  View All Apps
+                  <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Sidebar -->
+        <Sidebar posts={blogPosts} totalApps={4} totalPosts={blogPosts.length} />
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>

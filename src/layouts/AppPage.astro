@@ -1,0 +1,457 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  emoji: string;
+  storeLink?: string;
+  websiteLink?: string;
+  screenshots: string[];
+  features?: string[];
+  techStack?: string[];
+  category: string;
+}
+
+const { title, description, emoji, storeLink, websiteLink, screenshots, features, techStack, category } = Astro.props;
+---
+
+<Layout title={`${title} - App Showcase`}>
+  <main class="app-page">
+    <div class="app-container">
+      <!-- Header Section -->
+      <header class="app-header">
+        <div class="app-icon">{emoji}</div>
+        <h1>{title}</h1>
+        <p class="app-description">{description}</p>
+        <span class="category-badge">{category}</span>
+        
+        <!-- Store/Website Links -->
+        <div class="action-links">
+          {storeLink && (
+            <a href={storeLink} class="store-link" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Download on App Store
+            </a>
+          )}
+          {websiteLink && (
+            <a href={websiteLink} class="website-link" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              Visit Website
+            </a>
+          )}
+        </div>
+      </header>
+
+      <!-- Screenshot Carousel -->
+      <section class="carousel-section">
+        <h2>Screenshots</h2>
+        <div class="carousel-container">
+          <div class="carousel">
+            <div class="carousel-track" id="carousel-track">
+              {screenshots.map((screenshot, index) => (
+                <div class="carousel-slide" data-index={index}>
+                  <img src={screenshot} alt={`${title} screenshot ${index + 1}`} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Navigation Controls -->
+          <button class="carousel-btn prev" id="prev-btn" aria-label="Previous screenshot">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="carousel-btn next" id="next-btn" aria-label="Next screenshot">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+          
+          <!-- Dots Indicator -->
+          <div class="carousel-dots" id="carousel-dots">
+            {screenshots.map((_, index) => (
+              <button class={`dot ${index === 0 ? 'active' : ''}`} data-index={index} aria-label={`Go to screenshot ${index + 1}`}></button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      {features && features.length > 0 && (
+        <section class="features-section">
+          <h2>Key Features</h2>
+          <ul class="features-list">
+            {features.map(feature => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <!-- Tech Stack Section -->
+      {techStack && techStack.length > 0 && (
+        <section class="tech-stack-section">
+          <h2>Tech Stack</h2>
+          <div class="tech-tags">
+            {techStack.map(tech => (
+              <span class="tech-tag">{tech}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Additional Content Slot -->
+      <div class="app-content">
+        <slot />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const track = document.getElementById('carousel-track') as HTMLElement;
+  const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+  const dotsContainer = document.getElementById('carousel-dots') as HTMLElement;
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
+  
+  let currentIndex = 0;
+  
+  function updateCarousel() {
+    const offset = -currentIndex * 100;
+    track.style.transform = `translateX(${offset}%)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  });
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      updateCarousel();
+    });
+  });
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+    }
+  });
+  
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+  
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextBtn.click();
+      } else {
+        prevBtn.click();
+      }
+    }
+  }
+</script>
+
+<style>
+  .app-page {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background: var(--theme-bg);
+    color: var(--theme-text);
+  }
+  
+  .app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header */
+  .app-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .app-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .app-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--theme-text);
+  }
+  
+  .app-description {
+    font-size: 1.25rem;
+    color: var(--theme-text-lighter);
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    line-height: 1.6;
+  }
+  
+  .category-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--theme-accent);
+    color: var(--theme-bg);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+  
+  /* Action Links */
+  .action-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .store-link,
+  .website-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .store-link:hover,
+  .website-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Carousel */
+  .carousel-section {
+    margin-bottom: 4rem;
+  }
+  
+  .carousel-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--theme-text);
+  }
+  
+  .carousel-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .carousel {
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--theme-divider);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--theme-bg);
+  }
+  
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+  }
+  
+  /* Carousel Buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--theme-bg);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+  
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .carousel-btn.prev {
+    left: 1rem;
+  }
+  
+  .carousel-btn.next {
+    right: 1rem;
+  }
+  
+  /* Carousel Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--theme-divider);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .dot.active {
+    background: var(--theme-accent);
+    transform: scale(1.2);
+  }
+  
+  .dot:hover {
+    background: var(--theme-accent-light, var(--theme-accent));
+  }
+  
+  /* Features */
+  .features-section {
+    margin-bottom: 4rem;
+  }
+  
+  .features-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text);
+  }
+  
+  .features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .features-list li {
+    padding: 1rem 1.5rem;
+    background: var(--theme-code-inline-bg);
+    border-left: 3px solid var(--theme-accent);
+    border-radius: 4px;
+    color: var(--theme-text);
+  }
+  
+  /* Tech Stack */
+  .tech-stack-section {
+    margin-bottom: 4rem;
+  }
+  
+  .tech-stack-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text);
+  }
+  
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .tech-tag {
+    padding: 0.5rem 1rem;
+    background: var(--theme-code-inline-bg);
+    color: var(--theme-accent);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid var(--theme-accent);
+  }
+  
+  /* Content */
+  .app-content {
+    margin-top: 4rem;
+    color: var(--theme-text);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .app-header h1 {
+      font-size: 2rem;
+    }
+    
+    .app-description {
+      font-size: 1rem;
+    }
+    
+    .carousel-btn {
+      padding: 0.75rem;
+    }
+    
+    .carousel-btn.prev {
+      left: 0.5rem;
+    }
+    
+    .carousel-btn.next {
+      right: 0.5rem;
+    }
+    
+    .features-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

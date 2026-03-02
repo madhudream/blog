@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="WordStash: Your Personal Vocabulary Companion - Madhu's Dream">
+  <div class="pt-16 min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <a href="/" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mb-8 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full text-sm font-medium">
+            iOS Development
+          </span>
+          <time class="text-gray-600">February 28, 2026</time>
+          <span class="text-gray-500">• 8 min read</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          WordStash: Your Personal Vocabulary Companion
+        </h1>
+        
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Building a dead-simple iOS app for capturing and learning new words. From idea to App Store in one day.
+        </p>
+      </header>
+
+      <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl">
+        <img 
+          src="/wordstash/image1.png" 
+          alt="WordStash App"
+          class="w-full"
+          onerror="this.parentElement.innerHTML='<div class=\'aspect-video bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center text-6xl\'>📚</div>'"
+        />
+      </div>
+
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">The Problem I Wanted to Solve</h2>
+          <p class="text-gray-700 leading-relaxed">
+            You know that moment when you're reading on your phone and come across a word you don't know? 
+            You could switch apps, look it up, maybe save it somewhere... but honestly, it's too much friction. 
+            By the time you get back to reading, you've lost your flow.
+          </p>
+          <p class="text-gray-700 leading-relaxed mt-4">
+            I wanted something faster. <strong>Something that just works.</strong>
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 mb-8 border border-blue-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            WordStash is built around one simple idea: <strong>capturing words should take seconds, not minutes.</strong>
+          </p>
+          <ol class="text-gray-700 leading-relaxed space-y-3 ml-6">
+            <li class="font-medium">📖 See a new word while reading</li>
+            <li class="font-medium">📋 Copy it</li>
+            <li class="font-medium">📱 Open WordStash and tap the clipboard button</li>
+            <li class="font-medium">✅ Done.</li>
+          </ol>
+          <p class="text-gray-700 leading-relaxed mt-4">
+            The app automatically fetches the meaning and usage examples using AI. No typing, no searching – just instant knowledge.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Features I'm Proud Of</h2>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">
+                🤖
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AI-Powered Definitions</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Every word you add gets an automatic definition and real-world usage examples using OpenAI's API.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center text-2xl">
+                🔊
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Pronunciation Made Easy</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Tap the speaker icon next to any word and hear how it's pronounced. Works offline using iOS's built-in text-to-speech.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-2xl">
+                📇
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Flash Cards for Review</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Swipeable flash cards with smooth flip animations. Filter to review just your starred words.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl">
+                ☁️
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Sync</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Your vocabulary syncs across all your devices using Supabase. iPhone to iPad – everything stays in sync.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl p-10 text-white mb-8">
+          <h2 class="text-3xl font-bold mb-4">Built During My Hospital Stay</h2>
+          <p class="text-white/90 text-lg">
+            This app was created in just <strong>1 day</strong> during my 5-day hospital stay, using AI-driven development. 
+            It's a testament to what's possible when you combine clear vision with modern development tools.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">The Tech Stack</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {['SwiftUI', 'SwiftData', 'Supabase', 'OpenAI API', 'AVSpeechSynthesizer', 'iOS 17'].map(tech => (
+              <div class="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-center text-sm font-medium text-blue-900">
+                {tech}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-gray-200 flex justify-between">
+        <a href="/" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+        <a href="/apps/wordstash" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors">
+          View App Details
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </article>
+  </div>
+</Layout>

@@ -1,0 +1,66 @@
+---
+export interface Props {
+  published: number;
+  inProgress: number;
+  goal: number;
+}
+
+const { published = 3, inProgress = 1, goal = 100 } = Astro.props;
+---
+
+<section class="relative py-24 px-4 overflow-hidden">
+  <div class="absolute inset-0 opacity-60" style="background: linear-gradient(135deg, var(--theme-primary-from)15, transparent, var(--theme-accent-from)10);"></div>
+  <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 120%, var(--theme-bg-gradient1), transparent 50%);"></div>
+  
+  <div class="relative max-w-6xl mx-auto text-center">
+    <div class="animate-slide-up">
+      <h1 
+        class="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent animate-gradient leading-tight"
+        style="background-image: linear-gradient(to right, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from)); background-size: 200% 200%;"
+      >
+        Building My Legacy
+      </h1>
+      <p class="text-2xl md:text-3xl mb-4 max-w-3xl mx-auto font-semibold" style="color: var(--theme-text-primary);">
+        One app at a time, one story at a time
+      </p>
+      <p class="text-lg mb-10 max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
+        20 years in the U.S. • {goal}+ apps goal • AI-powered development
+      </p>
+      
+      <div 
+        class="inline-flex items-center gap-6 backdrop-blur-sm shadow-2xl rounded-3xl px-10 py-6"
+        style="background: var(--theme-card-bg); border: 1px solid var(--theme-card-border); box-shadow: 0 20px 50px var(--theme-card-hover);"
+      >
+        <div class="text-center">
+          <div 
+            class="text-4xl font-bold bg-clip-text text-transparent"
+            style="background-image: linear-gradient(135deg, var(--theme-primary-from), var(--theme-primary-to));"
+          >
+            {published}
+          </div>
+          <div class="text-sm font-medium" style="color: var(--theme-text-secondary);">Published</div>
+        </div>
+        <div class="h-14 w-px" style="background: var(--theme-card-border);"></div>
+        <div class="text-center">
+          <div 
+            class="text-4xl font-bold bg-clip-text text-transparent"
+            style="background-image: linear-gradient(135deg, var(--theme-secondary-from), var(--theme-secondary-to));"
+          >
+            {inProgress}
+          </div>
+          <div class="text-sm font-medium" style="color: var(--theme-text-secondary);">In Progress</div>
+        </div>
+        <div class="h-14 w-px" style="background: var(--theme-card-border);"></div>
+        <div class="text-center">
+          <div 
+            class="text-4xl font-bold bg-clip-text text-transparent"
+            style="background-image: linear-gradient(to right, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from));"
+          >
+            {goal}+
+          </div>
+          <div class="text-sm font-medium" style="color: var(--theme-text-secondary);">Goal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

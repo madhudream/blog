@@ -1,0 +1,134 @@
+---
+import { themes, defaultTheme } from '../config/themes';
+---
+
+<div id="theme-picker" class="fixed bottom-6 right-6 z-50">
+  <button 
+    id="theme-toggle"
+    class="flex items-center gap-2 px-5 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+    style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-primary-to)); color: white;"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+    </svg>
+    <span class="font-semibold text-sm">Change Theme</span>
+  </button>
+  
+  <div 
+    id="theme-menu"
+    class="absolute bottom-full right-0 mb-4 bg-white rounded-2xl shadow-2xl border p-4 hidden min-w-[280px]"
+    style="border-color: var(--theme-card-border);"
+  >
+    <h3 class="font-bold text-lg mb-3" style="color: var(--theme-text-primary);">Choose Theme</h3>
+    <div class="space-y-2">
+      {Object.values(themes).map((theme) => (
+        <button
+          class="theme-option w-full text-left p-3 rounded-xl transition-all hover:scale-102"
+          data-theme={theme.id}
+          style={`background: linear-gradient(135deg, ${theme.colors.primary.from}15, ${theme.colors.secondary.from}10);`}
+        >
+          <div class="flex items-center gap-3">
+            <div 
+              class="w-10 h-10 rounded-lg flex-shrink-0"
+              style={`background: linear-gradient(135deg, ${theme.colors.primary.from}, ${theme.colors.primary.to});`}
+            ></div>
+            <div class="flex-1">
+              <div class="font-semibold text-sm" style={`color: ${theme.colors.text.primary};`}>{theme.name}</div>
+              <div class="text-xs" style={`color: ${theme.colors.text.tertiary};`}>{theme.description}</div>
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import { themes, defaultTheme } from '../config/themes';
+  
+  function getCurrentTheme() {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || defaultTheme;
+    }
+    return defaultTheme;
+  }
+  
+  function applyTheme(themeId: string) {
+    const theme = themes[themeId];
+    if (!theme) return;
+    
+    const root = document.documentElement;
+    
+    // Apply CSS variables
+    root.style.setProperty('--theme-primary-from', theme.colors.primary.from);
+    root.style.setProperty('--theme-primary-to', theme.colors.primary.to);
+    root.style.setProperty('--theme-secondary-from', theme.colors.secondary.from);
+    root.style.setProperty('--theme-secondary-to', theme.colors.secondary.to);
+    root.style.setProperty('--theme-accent-from', theme.colors.accent.from);
+    root.style.setProperty('--theme-accent-to', theme.colors.accent.to);
+    
+    root.style.setProperty('--theme-bg-base', theme.colors.background.base);
+    root.style.setProperty('--theme-bg-gradient1', theme.colors.background.gradient1);
+    root.style.setProperty('--theme-bg-gradient2', theme.colors.background.gradient2);
+    root.style.setProperty('--theme-bg-gradient3', theme.colors.background.gradient3);
+    
+    root.style.setProperty('--theme-text-primary', theme.colors.text.primary);
+    root.style.setProperty('--theme-text-secondary', theme.colors.text.secondary);
+    root.style.setProperty('--theme-text-tertiary', theme.colors.text.tertiary);
+    
+    root.style.setProperty('--theme-card-bg', theme.colors.card.bg);
+    root.style.setProperty('--theme-card-border', theme.colors.card.border);
+    root.style.setProperty('--theme-card-hover', theme.colors.card.hover);
+    
+    // Save to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', themeId);
+    }
+  }
+  
+  // Initialize theme on load
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentTheme = getCurrentTheme();
+    applyTheme(currentTheme);
+    
+    const toggleBtn = document.getElementById('theme-toggle');
+    const menu = document.getElementById('theme-menu');
+    const options = document.querySelectorAll('.theme-option');
+    
+    toggleBtn?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const picker = document.getElementById('theme-picker');
+      if (picker && !picker.contains(e.target as Node)) {
+        menu?.classList.add('hidden');
+      }
+    });
+    
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        const themeId = option.getAttribute('data-theme');
+        if (themeId) {
+          applyTheme(themeId);
+          menu?.classList.add('hidden');
+          
+          // Reload to apply theme fully
+          window.location.reload();
+        }
+      });
+    });
+  });
+  
+  // Apply theme immediately (for SSR)
+  if (typeof window !== 'undefined') {
+    applyTheme(getCurrentTheme());
+  }
+</script>
+
+<style>
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
+</style>

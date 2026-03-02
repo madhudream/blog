@@ -1,0 +1,94 @@
+---
+import AppPage from '../../layouts/AppPage.astro';
+
+const screenshots = [
+  '/optionmantra/image1.png',
+  '/optionmantra/image2.png',
+  '/optionmantra/image3.png',
+  '/optionmantra/image4.png',
+];
+
+const features = [
+  '📊 Real-time VIX data pipeline',
+  '💰 Cost-effective at $1-2/month',
+  '🔄 Automated data collection and processing',
+  '☁️ Google Cloud Storage integration',
+  '📈 Historical data analysis',
+  '🎯 SQLite for efficient local storage',
+  '⚡ Fast query performance',
+  '🛠️ Python-based data engineering',
+];
+
+const techStack = [
+  'Python',
+  'SQLite',
+  'Google Cloud Storage',
+  'Pandas',
+  'GitHub Actions',
+  'Unix/Cron',
+];
+---
+
+<AppPage
+  title="OptionMantra"
+  emoji="📊"
+  description="A practical VIX data pipeline built for everyday use. Automated data collection, processing, and storage at just $2/month instead of $500/month."
+  category="Data Engineering"
+  websiteLink="https://optionmantra.example.com"
+  screenshots={screenshots}
+  features={features}
+  techStack={techStack}
+>
+  <section class="additional-info">
+    <h2>About OptionMantra</h2>
+    <p>
+      OptionMantra started as a simple need: reliable VIX data without the enterprise price tag. 
+      Instead of paying $500/month for market data feeds, I built a cost-effective pipeline 
+      that does exactly what's needed - nothing more, nothing less.
+    </p>
+    <p>
+      Using Python, SQLite, and Google Cloud Storage, the entire system runs for $1-2/month. 
+      Automated data collection, efficient storage, and fast queries - all the essentials 
+      without the bloat. A practical solution for a practical problem.
+    </p>
+    <a href="/blog/optionmantra" class="read-more">Read the technical details →</a>
+  </section>
+</AppPage>
+
+<style>
+  .additional-info {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .additional-info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text);
+  }
+  
+  .additional-info p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--theme-text-lighter);
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .read-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+</style>

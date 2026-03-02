@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AppCard from '../components/AppCard.astro';
+
+const apps = [
+  {
+    id: 'wordstash',
+    title: 'WordStash',
+    description: 'Your Personal Vocabulary Companion - iOS app for capturing and learning new words',
+    status: 'Live',
+    category: 'iOS App',
+    icon: '📚',
+    link: '/app/wordstash',
+  },
+  {
+    id: 'optionmantra',
+    title: 'OptionMantra',
+    description: 'VIX Data Pipeline - 5-minute OHLC tracking with Yahoo Finance and Tastytrade integration',
+    status: 'Live',
+    category: 'Web App',
+    icon: '📊',
+    link: '/app/optionmantra',
+  },
+  {
+    id: 'contentflow',
+    title: 'ContentFlow CMS',
+    description: 'AI-Powered Content Management System built in 32 hours with Level 4 AI',
+    status: 'Live',
+    category: 'Web App',
+    icon: '🚀',
+    link: '/app/contentflow-cms',
+  },
+  {
+    id: 'coming-soon-1',
+    title: '14 Peaks',
+    description: 'Currently in development - stay tuned for updates',
+    status: 'In Progress',
+    category: 'Web App',
+    icon: '🏔️',
+    link: '#',
+  },
+];
+
+const placeholders = Array.from({ length: 6 }, (_, i) => ({
+  id: `placeholder-${i}`,
+  title: 'Coming Soon',
+  description: 'More innovative apps in the pipeline...',
+  status: 'Planned',
+  icon: '✨',
+  link: '#',
+}));
+
+const allApps = [...apps, ...placeholders];
+---
+
+<Layout title="My Apps - Madhu's Dream">
+  <div class="pt-16 min-h-screen">
+    <!-- Header -->
+    <section class="py-16 px-4 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-40" style="background: linear-gradient(135deg, var(--theme-bg-gradient1), transparent, var(--theme-bg-gradient2));"></div>
+      <div class="max-w-6xl mx-auto text-center relative">
+        <h1 
+          class="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent"
+          style="background-image: linear-gradient(to right, var(--theme-primary-from), var(--theme-accent-from)); background-size: 200% 200%;"
+        >
+          My Apps & Projects
+        </h1>
+        <p class="text-xl mb-4 max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
+          Building innovative solutions one app at a time
+        </p>
+        <div 
+          class="inline-flex items-center gap-6 shadow-lg rounded-2xl px-8 py-4"
+          style="background: var(--theme-card-bg); border: 1px solid var(--theme-card-border);"
+        >
+          <div class="text-center">
+            <div class="text-2xl font-bold" style="color: var(--theme-primary-from);">{apps.filter(a => a.status === 'Live').length}</div>
+            <div class="text-sm" style="color: var(--theme-text-tertiary);">Live</div>
+          </div>
+          <div class="h-8 w-px" style="background: var(--theme-card-border);"></div>
+          <div class="text-center">
+            <div class="text-2xl font-bold" style="color: var(--theme-accent-from);">{apps.filter(a => a.status === 'In Progress').length}</div>
+            <div class="text-sm" style="color: var(--theme-text-tertiary);">In Progress</div>
+          </div>
+          <div class="h-8 w-px" style="background: var(--theme-card-border);"></div>
+          <div class="text-center">
+            <div 
+              class="text-2xl font-bold bg-clip-text text-transparent"
+              style="background-image: linear-gradient(to right, var(--theme-primary-from), var(--theme-accent-from));"
+            >
+              100+
+            </div>
+            <div class="text-sm" style="color: var(--theme-text-tertiary);">Goal</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allApps.map((app) => (
+          <AppCard {...app} />
+        ))}
+      </div>
+
+      <!-- CTA Section -->
+      <div 
+        class="mt-20 text-center rounded-3xl p-12 border relative overflow-hidden"
+        style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3)); border-color: var(--theme-card-border);"
+      >
+        <div class="absolute inset-0 opacity-30" style="background: var(--theme-card-bg);"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">More Coming Soon!</h2>
+          <p class="text-lg mb-6 max-w-2xl mx-auto" style="color: var(--theme-text-secondary);">
+            This is just the beginning. Follow my journey as I document the process of building 100+ apps.
+          </p>
+          <a 
+            href="/" 
+            class="inline-flex items-center px-6 py-3 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all"
+            style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-accent-from));"
+          >
+            Read the Blog
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+    opacity: 0;
+  }
+</style>

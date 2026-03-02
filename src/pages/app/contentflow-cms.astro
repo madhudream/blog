@@ -1,0 +1,99 @@
+---
+import AppPage from '../../layouts/AppPage.astro';
+
+const screenshots = [
+  '/contentflow/image1.png',
+  '/contentflow/image2.png',
+  '/contentflow/image3.png',
+  '/contentflow/image4.png',
+  '/contentflow/image5.png',
+  '/contentflow/image6.png',
+  '/contentflow/image7.png',
+  '/contentflow/image8.png',
+];
+
+const features = [
+  '⚡ Lightning fast - 200ms page loads vs 5+ seconds',
+  '💰 Cost-effective - $7/month vs $2000/month',
+  '🎨 Modern design system with consistent UI',
+  '📝 Rich content editing with preview',
+  '🔍 Advanced search and filtering',
+  '🔐 Role-based access control',
+  '📱 Responsive across all devices',
+  '🚀 Built with AI assistance (Level 4)',
+];
+
+const techStack = [
+  'Next.js 15',
+  'TypeScript',
+  'Astro',
+  'Tailwind CSS',
+  'Supabase',
+  'PostgreSQL',
+  'Vercel',
+];
+---
+
+<AppPage
+  title="ContentFlow CMS"
+  emoji="📝"
+  description="A modern, lightning-fast content management system built for performance and cost-efficiency. From idea to production in weeks with AI assistance."
+  category="Web App"
+  websiteLink="https://contentflow.example.com"
+  screenshots={screenshots}
+  features={features}
+  techStack={techStack}
+>
+  <section class="additional-info">
+    <h2>About ContentFlow</h2>
+    <p>
+      ContentFlow CMS was built to solve the problem of slow, expensive legacy CMSes. 
+      What started as a frustration with 5-second page loads and $2000/month hosting bills 
+      became a journey into modern web development with AI assistance.
+    </p>
+    <p>
+      The result? A blazing-fast CMS that loads in 200ms, costs just $7/month to run, 
+      and was built entirely with AI pair programming at "Level 4" - where I provided 
+      high-level direction and AI handled the implementation details.
+    </p>
+    <a href="/blog/contentflow-cms" class="read-more">Read the full story →</a>
+  </section>
+</AppPage>
+
+<style>
+  .additional-info {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .additional-info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text);
+  }
+  
+  .additional-info p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--theme-text-lighter);
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .read-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+</style>

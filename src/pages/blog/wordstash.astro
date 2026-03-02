@@ -1,0 +1,59 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'fs';
+import path from 'path';
+import { marked } from 'marked';
+
+// Read the markdown content
+const contentPath = path.join(process.cwd(), 'content', 'wordstash.md');
+const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+
+// Extract content after the first heading and table of contents
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="problem">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots = [
+  '/wordstash/image1.png',
+  '/wordstash/image2.png',
+  '/wordstash/image3.png',
+  '/wordstash/image4.png',
+  '/wordstash/image5.png',
+];
+
+const tocItems = [
+  { id: 'problem', label: 'The Problem' },
+  { id: 'vision', label: 'The Vision' },
+  { id: 'how-it-works', label: 'How It Works' },
+  { id: 'features', label: 'Features' },
+  { id: 'architecture', label: 'Architecture' },
+  { id: 'tech-stack', label: 'Tech Stack' },
+  { id: 'user-experience', label: 'User Experience' },
+  { id: 'who-its-for', label: "Who It's For" },
+  { id: 'roadmap', label: "What's Next" },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+];
+---
+
+<BlogPost
+  title="Introducing WordStash: Your Personal Vocabulary Companion"
+  date="March 2, 2026"
+  readTime="6 min read"
+  category="iOS Development"
+  emoji="📚"
+  description="Building a dead-simple iOS app for capturing and learning new words. From copy-paste to AI-powered definitions in seconds."
+  screenshots={screenshots}
+  tocItems={tocItems}
+  appLink="/app/wordstash"
+>
+  <Fragment set:html={content} />
+</BlogPost>

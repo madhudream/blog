@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+import ThemePicker from '../components/ThemePicker.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Madhu's Dream - Building 100+ Apps | Personal Blog" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen">
+    <!-- Sophisticated gradient background - theme aware -->
+    <div class="fixed inset-0 -z-10" style="background: var(--theme-bg-base);"></div>
+    <div class="fixed inset-0 -z-10" style="background: radial-gradient(circle at 30% 20%, var(--theme-bg-gradient1), transparent 50%);"></div>
+    <div class="fixed inset-0 -z-10" style="background: radial-gradient(circle at 70% 80%, var(--theme-bg-gradient2), transparent 50%);"></div>
+    <div class="fixed inset-0 -z-10" style="background: radial-gradient(circle at 50% 50%, var(--theme-bg-gradient3), transparent 60%);"></div>
+    
+    <!-- Navigation -->
+    <nav class="sticky top-0 w-full backdrop-blur-xl border-b z-50" style="background: var(--theme-card-bg); border-color: var(--theme-card-border);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a href="/" class="flex items-center space-x-2 group">
+            <span 
+              class="text-2xl font-bold bg-clip-text text-transparent animate-gradient"
+              style="background-image: linear-gradient(to right, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from)); background-size: 200% 200%;"
+            >
+              Madhu's Dream
+            </span>
+          </a>
+          <div class="flex items-center space-x-8">
+            <a href="/" class="font-medium transition-colors hover-link" style="color: var(--theme-text-secondary);">Blog</a>
+            <a href="/apps" class="font-medium transition-colors hover-link" style="color: var(--theme-text-secondary);">Apps</a>
+            <a 
+              href="mailto:madhured@gmail.com" 
+              class="px-5 py-2.5 text-white rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"
+              style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+    
+    <footer class="relative py-16 px-4 mt-32 overflow-hidden">
+      <div class="absolute inset-0 -z-10 opacity-40" style="background: linear-gradient(to bottom, transparent, var(--theme-bg-gradient1), var(--theme-bg-gradient2));"></div>
+      <div class="absolute inset-0 border-t -z-10" style="border-color: var(--theme-card-border);"></div>
+      
+      <div class="max-w-6xl mx-auto text-center relative">
+        <p class="text-xl font-serif mb-3 italic" style="color: var(--theme-text-primary);">With the blessings of Bhairava baba and Hanuman ji 🙏</p>
+        <p class="mb-8" style="color: var(--theme-text-secondary);">
+          Contact: <a href="mailto:madhured@gmail.com" class="font-semibold transition-colors" style="color: var(--theme-primary-from);">madhured@gmail.com</a>
+        </p>
+        <div class="flex justify-center gap-12 mb-8">
+          <a href="/" class="transition-colors font-medium hover-link" style="color: var(--theme-text-secondary);">Blog</a>
+          <a href="/apps" class="transition-colors font-medium hover-link" style="color: var(--theme-text-secondary);">Apps</a>
+          <a href="mailto:madhured@gmail.com" class="transition-colors font-medium hover-link" style="color: var(--theme-text-secondary);">Contact</a>
+        </div>
+        <p class="text-sm font-medium" style="color: var(--theme-text-tertiary);">© {new Date().getFullYear()} Madhu. Building legacy, one app at a time.</p>
+      </div>
+    </footer>
+    
+    <ThemePicker />
+  </body>
+</html>
+
+<style>
+  .hover-link:hover {
+    color: var(--theme-primary-from);
+  }
+</style>

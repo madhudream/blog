@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="VIX Data Pipeline: A Practical Build - Madhu's Dream">
+  <div class="pt-16 min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <a href="/" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mb-8 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-medium">
+            Data Engineering
+          </span>
+          <time class="text-gray-600">February 27, 2026</time>
+          <span class="text-gray-500">• 10 min read</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          VIX Data Pipeline: A Practical Build
+        </h1>
+        
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Creating a reliable system to track VIX at 5-minute resolution, blending Yahoo Finance with Tastytrade live data.
+        </p>
+      </header>
+
+      <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-green-100 to-emerald-100 p-12 flex items-center justify-center">
+        <div class="text-9xl">📊</div>
+      </div>
+
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">The Big Picture</h2>
+          <p class="text-gray-700 leading-relaxed">
+            I wanted a clean, reliable way to track VIX at 5-minute resolution without babysitting it every day. 
+            The result is a small pipeline that blends historical candles from Yahoo Finance with live quotes from 
+            Tastytrade, then stores everything in Google Cloud Storage (GCS) so it's easy to query later.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 mb-8 border border-green-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How The Pieces Fit Together</h2>
+          
+          <div class="space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-md">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold">
+                  1
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Historical 5-minute data (Yahoo Finance)</h3>
+                  <p class="text-gray-700 leading-relaxed">
+                    The collector handles the 60-day intraday limit by running daily and merging results into a 
+                    local SQLite database. Over time, builds a much longer series than Yahoo alone allows.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold">
+                  2
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Live VIX collection (Tastytrade)</h3>
+                  <p class="text-gray-700 leading-relaxed mb-3">
+                    Live quotes are pulled during market hours and shaped into the same OHLC record format.
+                  </p>
+                  <ul class="text-gray-700 space-y-2 ml-6">
+                    <li><strong>5-minute collector:</strong> lightweight, mirrors historical schema</li>
+                    <li><strong>1-minute collector:</strong> richer, includes daily highs/lows and metadata</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold">
+                  3
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Serving data from GCS</h3>
+                  <p class="text-gray-700 leading-relaxed mb-3">
+                    Two HTTP functions make the data easy to consume:
+                  </p>
+                  <ul class="text-gray-700 space-y-2 ml-6">
+                    <li><strong>Nearest match by timestamp:</strong> closest records around a given time</li>
+                    <li><strong>Date range query:</strong> all records between two timestamps</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">The Data Shape (5-minute OHLC)</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Everything is normalized to this structure so historical and live data can be merged cleanly:
+          </p>
+          <pre class="bg-gray-900 text-green-400 rounded-xl p-6 overflow-x-auto font-mono text-sm">{`{
+  "datetime": "YYYY-MM-DD HH:MM:SS",
+  "open": 0.0,
+  "high": 0.0,
+  "low": 0.0,
+  "close": 0.0,
+  "volume": 0
+}`}</pre>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Storage Layout in GCS</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Partitioning by year/month keeps lookups fast and costs low:
+          </p>
+          <pre class="bg-gray-900 text-cyan-400 rounded-xl p-6 overflow-x-auto font-mono text-sm">{`{bucket}/YYYY/MM.json
+{bucket}/YYYY/MM_live.json
+{bucket}/live_data/YYYY/MM_livemin.json`}</pre>
+        </div>
+
+        <div class="bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl p-10 text-white mb-8">
+          <h2 class="text-3xl font-bold mb-4">Built During My Hospital Stay</h2>
+          <p class="text-white/90 text-lg">
+            This VIX data pipeline was created in just <strong>1 day</strong> during my 5-day hospital stay, 
+            using AI-driven development. A practical tool for options traders and market analysts.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-200">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">What's Already Done</h2>
+          <ul class="text-gray-700 leading-relaxed space-y-3 ml-6">
+            <li class="flex items-start gap-3">
+              <span class="text-green-500 text-xl">✓</span>
+              <span>Market-hours checks so live collectors stay quiet outside the session</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-500 text-xl">✓</span>
+              <span>Monthly partitioning and deduplication for clean time series storage</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-500 text-xl">✓</span>
+              <span>Cloud Scheduler wiring for hands-off collection</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-500 text-xl">✓</span>
+              <span>Two retrieval APIs: nearest timestamp and date range</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-500 text-xl">✓</span>
+              <span>Exploration tools to inspect the full Tastytrade payload</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-gray-200 flex justify-between">
+        <a href="/" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+        <a href="/apps/optionmantra" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors">
+          View App Details
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </article>
+  </div>
+</Layout>

@@ -1,0 +1,313 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const screenshots = [
+  '/contentflow/image1.png',
+  '/contentflow/image2.png',
+  '/contentflow/image3.png',
+  '/contentflow/image4.png',
+  '/contentflow/image5.png',
+  '/contentflow/image6.png',
+];
+---
+
+<Layout title="ContentFlow CMS - AI-Powered Content Management">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Back Button -->
+    <a href="/" class="inline-flex items-center text-purple-400 hover:text-purple-300 mb-8 transition-colors">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Apps
+    </a>
+
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="text-6xl mb-6">🚀</div>
+      <h1 class="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+        ContentFlow CMS
+      </h1>
+      <p class="text-xl text-slate-300 mb-6">
+        AI-Powered Content Management for Modern Web Apps
+      </p>
+      <div class="flex justify-center gap-4 mb-6">
+        <span class="px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">
+          🌐 Web App
+        </span>
+        <span class="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30">
+          ✓ Live on Azure
+        </span>
+        <a 
+          href="https://contentflow-app.salmonwave-4851ce16.eastus.azurecontainerapps.io/cms" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-sm hover:from-purple-600 hover:to-pink-600 transition-all"
+        >
+          Try Demo →
+        </a>
+      </div>
+    </div>
+
+    <!-- Screenshots Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+      {screenshots.map((src) => (
+        <div class="rounded-xl overflow-hidden border border-slate-700 bg-slate-800/50 hover:border-purple-500/50 transition-colors">
+          <img 
+            src={src} 
+            alt="ContentFlow CMS Screenshot" 
+            class="w-full h-auto"
+            onerror="this.parentElement.innerHTML='<div class=\'aspect-video flex items-center justify-center text-slate-600\'>Screenshot Coming Soon</div>'"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+      <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-6 text-center">
+        <div class="text-4xl font-bold text-purple-400 mb-2">2 Days</div>
+        <div class="text-slate-400">Development Time</div>
+      </div>
+      <div class="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-6 text-center">
+        <div class="text-4xl font-bold text-green-400 mb-2">$7/mo</div>
+        <div class="text-slate-400">Hosting Cost</div>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6 text-center">
+        <div class="text-4xl font-bold text-blue-400 mb-2">99%</div>
+        <div class="text-slate-400">Cost Savings</div>
+      </div>
+    </div>
+
+    <!-- Blog Content -->
+    <article class="prose prose-invert prose-lg max-w-none">
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-4 text-purple-400">The Problem That Started It All</h2>
+        <p class="text-slate-300 leading-relaxed">
+          You're building web applications for your company, and every time the product team wants to change 
+          a button label, update help text, or fix a typo, they need to file a ticket, wait for a developer, 
+          and go through an entire deployment cycle. Multiply this by 10 languages, and you've got yourself 
+          a productivity nightmare.
+        </p>
+        <p class="text-slate-300 leading-relaxed mt-4">
+          We tried using third-party tools like Walkme and Pendo. They created an entirely different nightmare: 
+          <strong class="text-white">performance hell</strong>. These tools work by rendering a parallel layer 
+          on top of your React or Angular app, causing conflicts and adding 2-5 seconds to page loads. 
+          Plus, we were paying <strong class="text-white">$500-2000/month</strong> for the privilege.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Vision: Native Framework Integration</h2>
+        <p class="text-slate-300 leading-relaxed">
+          The core idea behind ContentFlow CMS was simple but powerful: 
+          <strong class="text-white">work WITH frameworks, not against them</strong>.
+        </p>
+        <p class="text-slate-300 leading-relaxed mt-4">
+          Instead of running parallel to your app like third-party tools, ContentFlow is a <em>native library</em> 
+          that integrates seamlessly into your codebase. Think of it as an SDK that developers include just like 
+          any other package—except this one gives product teams superpowers.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Architecture: Three Simple Layers</h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold text-pink-400 mb-2">1. The CMS Portal</h3>
+            <p class="text-slate-300 leading-relaxed">
+              A state-of-the-art visual editor inspired by modern design tools. You hover over elements in 
+              the preview iframe, and they highlight. Click the pencil icon, edit in the sidebar panel, 
+              save—and watch your changes appear instantly.
+            </p>
+            <p class="text-slate-400 text-sm mt-2">Tech: React + Tailwind</p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-pink-400 mb-2">2. The Unified Server</h3>
+            <p class="text-slate-300 leading-relaxed">
+              One consolidated Bun server that hosts all apps, stores content in Azure Blob Storage, 
+              and scales from 0 to 3 replicas based on traffic (scale-to-zero = near-zero cost).
+            </p>
+            <p class="text-slate-400 text-sm mt-2">Tech: Bun + Azure Container Apps</p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-pink-400 mb-2">3. The Framework-Agnostic SDK</h3>
+            <p class="text-slate-300 leading-relaxed">
+              The heart of the system. Zero dependencies in the core. Works with React, Angular, or any framework.
+              The SDK loads all content in a single JSON file per page—not 100 individual API calls like third-party tools.
+            </p>
+            <p class="text-slate-400 text-sm mt-2">Tech: TypeScript + Zero Dependencies</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Performance Story</h2>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-700">
+                <th class="py-3 px-4 text-purple-400">Metric</th>
+                <th class="py-3 px-4 text-slate-400">Third-Party Tools</th>
+                <th class="py-3 px-4 text-green-400">ContentFlow</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-300">
+              <tr class="border-b border-slate-800">
+                <td class="py-3 px-4 font-semibold">Page Load Impact</td>
+                <td class="py-3 px-4">+2-5 seconds</td>
+                <td class="py-3 px-4 text-green-400">+50-200ms</td>
+              </tr>
+              <tr class="border-b border-slate-800">
+                <td class="py-3 px-4 font-semibold">Network Requests</td>
+                <td class="py-3 px-4">10-50 per page</td>
+                <td class="py-3 px-4 text-green-400">1-2 per page</td>
+              </tr>
+              <tr class="border-b border-slate-800">
+                <td class="py-3 px-4 font-semibold">Bundle Size</td>
+                <td class="py-3 px-4">200-500 KB</td>
+                <td class="py-3 px-4 text-green-400">8-15 KB</td>
+              </tr>
+              <tr class="border-b border-slate-800">
+                <td class="py-3 px-4 font-semibold">Framework Conflicts</td>
+                <td class="py-3 px-4">Frequent</td>
+                <td class="py-3 px-4 text-green-400">Zero</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Monthly Cost</td>
+                <td class="py-3 px-4">$500-2000</td>
+                <td class="py-3 px-4 text-green-400">$7</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Features</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">✅</div>
+            <h4 class="font-semibold text-white mb-1">Multi-App Management</h4>
+            <p class="text-slate-400 text-sm">Manage 4 apps from a single CMS</p>
+          </div>
+          
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">🌍</div>
+            <h4 class="font-semibold text-white mb-1">Multi-Language Support</h4>
+            <p class="text-slate-400 text-sm">5 languages out of the box</p>
+          </div>
+          
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">🤖</div>
+            <h4 class="font-semibold text-white mb-1">AI Translation</h4>
+            <p class="text-slate-400 text-sm">One-click bulk translation with GPT-4</p>
+          </div>
+          
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">🖼️</div>
+            <h4 class="font-semibold text-white mb-1">Image Optimization</h4>
+            <p class="text-slate-400 text-sm">Automatic multi-size WebP generation</p>
+          </div>
+          
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">⚡</div>
+            <h4 class="font-semibold text-white mb-1">Zero Overhead</h4>
+            <p class="text-slate-400 text-sm">Native framework integration</p>
+          </div>
+          
+          <div class="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+            <div class="text-2xl mb-2">💰</div>
+            <h4 class="font-semibold text-white mb-1">Scale-to-Zero</h4>
+            <p class="text-slate-400 text-sm">$7/month hosting on Azure</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The AI Development Story</h2>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          I built this entire system—SDK, CMS, server, deployment infrastructure—in <strong class="text-white">2 days (32 hours)</strong> 
+          using what I call <strong class="text-white">Level 4 AI development</strong>.
+        </p>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          This means writing comprehensive specifications and letting AI implement them. I spent 4 hours writing specs, 
+          and AI wrote <strong class="text-white">90% of the code</strong> in 28 hours.
+        </p>
+        
+        <div class="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <h4 class="font-semibold text-purple-400 mb-2">Development Breakdown:</h4>
+          <ul class="text-slate-300 space-y-1 ml-6">
+            <li>4 hours: Writing detailed specifications</li>
+            <li>12 hours: AI implementation (SDK + CMS + Server)</li>
+            <li>4 hours: Testing and bug fixes</li>
+            <li>12 hours: Deployment setup + production testing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Tech Stack</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {['React 18', 'TypeScript', 'Tailwind CSS', 'Bun', 'Express.js', 'Zustand', 'Vite', 'Pulumi', 
+            'Azure Container Apps', 'Azure Blob Storage', 'Azure CDN', 'OpenAI API'].map(tech => (
+            <div class="bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-center text-sm text-slate-300">
+              {tech}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4 text-purple-400">The Results</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+          <div>
+            <h4 class="font-semibold text-pink-400 mb-2">Cost Savings</h4>
+            <p class="text-slate-300 text-sm">$500-2000/month → $7/month</p>
+            <p class="text-green-400 text-lg font-bold">99% reduction</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-pink-400 mb-2">Performance Improvement</h4>
+            <p class="text-slate-300 text-sm">Page load: 2-5s → 200ms</p>
+            <p class="text-green-400 text-lg font-bold">10-25x faster</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-pink-400 mb-2">Development Speed</h4>
+            <p class="text-slate-300 text-sm">2-3 weeks → 2 days</p>
+            <p class="text-green-400 text-lg font-bold">7-10x faster</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-pink-400 mb-2">Code Quality</h4>
+            <p class="text-slate-300 text-sm">90% AI-generated</p>
+            <p class="text-green-400 text-lg font-bold">Production-ready</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTA -->
+    <div class="mt-16 flex justify-center gap-4">
+      <a 
+        href="https://contentflow-app.salmonwave-4851ce16.eastus.azurecontainerapps.io/cms" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all"
+      >
+        Try Live Demo
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+      <a href="/" class="inline-flex items-center px-6 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to All Apps
+      </a>
+    </div>
+  </div>
+</Layout>

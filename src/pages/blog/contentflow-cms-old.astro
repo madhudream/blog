@@ -1,0 +1,381 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const screenshots = [
+  '/contentflow/image1.png',
+  '/contentflow/image2.png',
+  '/contentflow/image3.png',
+  '/contentflow/image4.png',
+  '/contentflow/image5.png',
+  '/contentflow/image6.png',
+  '/contentflow/image7.png',
+  '/contentflow/image8.png',
+];
+
+const tocItems = [
+  { id: 'problem', label: 'The Problem' },
+  { id: 'vision', label: 'The Vision' },
+  { id: 'architecture', label: 'Architecture' },
+  { id: 'performance', label: 'Performance Story' },
+  { id: 'cost', label: 'The Cost Story' },
+  { id: 'features', label: 'The Features' },
+  { id: 'ai-development', label: 'AI Development Story' },
+  { id: 'methodology', label: 'Development Methodology' },
+  { id: 'results', label: 'The Results' },
+  { id: 'learnings', label: 'The Learnings' },
+  { id: 'tech-stack', label: 'Tech Stack' },
+  { id: 'vision-beyond', label: 'Beyond the Code' },
+  { id: 'roadmap', label: "What's Next" },
+  { id: 'bigger-picture', label: 'The Bigger Picture' },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+  { id: 'screenshots', label: 'Screenshots' },
+];
+---
+
+<Layout title="Building ContentFlow CMS in 2 Days with AI - Madhu's Dream">
+  <div class="pt-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex gap-8">
+      <!-- Table of Contents Sidebar -->
+      <aside class="hidden lg:block w-64 flex-shrink-0">
+        <div 
+          class="sticky top-24 rounded-2xl p-6 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h3 class="font-bold mb-4 text-sm uppercase tracking-wider" style="color: var(--theme-text-primary);">
+            Table of Contents
+          </h3>
+          <nav class="space-y-2">
+            {tocItems.map(item => (
+              <a 
+                href={`#${item.id}`}
+                class="block text-sm py-1 transition-colors toc-link"
+                style="color: var(--theme-text-secondary);"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Article Content -->
+      <article class="flex-1 max-w-4xl">
+        <div class="mb-8">
+          <a 
+            href="/" 
+            class="inline-flex items-center font-medium mb-8 transition-colors hover-link"
+            style="color: var(--theme-text-secondary);"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </a>
+        </div>
+
+        <!-- Header -->
+        <header class="mb-12">
+          <div class="text-6xl mb-6">🚀</div>
+          <div class="flex items-center gap-4 mb-6 flex-wrap">
+            <span 
+              class="px-4 py-2 text-white rounded-full text-sm font-medium"
+              style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+            >
+              AI Development
+            </span>
+            <time style="color: var(--theme-text-tertiary);">March 2, 2026</time>
+            <span style="color: var(--theme-text-tertiary);">• 12 min read</span>
+          </div>
+          
+          <h1 
+            class="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+            style="color: var(--theme-text-primary);"
+          >
+            Building ContentFlow CMS: A Journey into AI-Powered Development
+          </h1>
+          
+          <p class="text-xl leading-relaxed" style="color: var(--theme-text-secondary);">
+            How I built an entire content management system using Level 4 AI development—SDK, CMS, server, and deployment—in just 32 hours.
+          </p>
+        </header>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+          <div 
+            class="rounded-xl p-6 text-center border"
+            style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+          >
+            <div class="text-4xl font-bold mb-2" style="color: var(--theme-primary-from);">2 Days</div>
+            <div style="color: var(--theme-text-secondary);">Development Time</div>
+          </div>
+          <div 
+            class="rounded-xl p-6 text-center border"
+            style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+          >
+            <div class="text-4xl font-bold mb-2" style="color: var(--theme-secondary-from);">$7/mo</div>
+            <div style="color: var(--theme-text-secondary);">Hosting Cost</div>
+          </div>
+          <div 
+            class="rounded-xl p-6 text-center border"
+            style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+          >
+            <div class="text-4xl font-bold mb-2" style="color: var(--theme-accent-from);">99%</div>
+            <div style="color: var(--theme-text-secondary);">Cost Savings</div>
+          </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none space-y-8 mb-12">
+        <!-- Problem Section -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">The Problem That Started It All</h2>
+          <p class="leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
+            You're building web applications for your company, and every time the product team wants to change 
+            a button label, update help text, or fix a typo, they need to file a ticket, wait for a developer, 
+            and go through an entire deployment cycle. Multiply this by 10 languages, and you've got yourself 
+            a productivity nightmare.
+          </p>
+          <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
+            We tried using third-party tools like Walkme and Pendo. They created an entirely different nightmare: 
+            <strong style="color: var(--theme-text-primary);">performance hell</strong>. These tools work by rendering a parallel layer 
+            on top of your React or Angular app, causing conflicts and adding 2-5 seconds to page loads. 
+            Plus, we were paying <strong style="color: var(--theme-text-primary);">$500-2000/month</strong> for the privilege.
+          </p>
+        </div>
+
+        <!-- Vision Section -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3)); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">The Vision: Native Framework Integration</h2>
+          <p class="leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
+            The core idea behind ContentFlow CMS was simple but powerful: <strong style="color: var(--theme-text-primary);">work WITH frameworks, not against them</strong>.
+          </p>
+          <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
+            Instead of running parallel to your app like third-party tools, ContentFlow would be a native library 
+            that integrates seamlessly into your codebase. Think of it as an SDK that developers include just like 
+            any other package—except this one gives product teams superpowers.
+          </p>
+        </div>
+
+        <!-- The Results -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">Performance Story: From 5 Seconds to 200ms</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div 
+              class="rounded-xl p-6 border"
+              style="background: var(--theme-card-hover); border-color: var(--theme-card-border);"
+            >
+              <div class="text-3xl font-bold mb-2" style="color: var(--theme-primary-from);">$7/mo</div>
+              <div style="color: var(--theme-text-secondary);">vs $500-2000/mo</div>
+              <div class="text-sm mt-2" style="color: var(--theme-text-tertiary);">99% cost savings</div>
+            </div>
+            <div 
+              class="rounded-xl p-6 border"
+              style="background: var(--theme-card-hover); border-color: var(--theme-card-border);"
+            >
+              <div class="text-3xl font-bold mb-2" style="color: var(--theme-secondary-from);">200ms</div>
+              <div style="color: var(--theme-text-secondary);">vs 2-5 seconds</div>
+              <div class="text-sm mt-2" style="color: var(--theme-text-tertiary);">10-25x faster</div>
+            </div>
+            <div 
+              class="rounded-xl p-6 border"
+              style="background: var(--theme-card-hover); border-color: var(--theme-card-border);"
+            >
+              <div class="text-3xl font-bold mb-2" style="color: var(--theme-primary-from);">2 days</div>
+              <div style="color: var(--theme-text-secondary);">vs 2-3 weeks</div>
+              <div class="text-sm mt-2" style="color: var(--theme-text-tertiary);">7-10x faster build</div>
+            </div>
+            <div 
+              class="rounded-xl p-6 border"
+              style="background: var(--theme-card-hover); border-color: var(--theme-card-border);"
+            >
+              <div class="text-3xl font-bold mb-2" style="color: var(--theme-accent-from);">90%</div>
+              <div style="color: var(--theme-text-secondary);">AI-generated code</div>
+              <div class="text-sm mt-2" style="color: var(--theme-text-tertiary);">Production-ready</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">The Architecture: Three Simple Layers</h2>
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">1. The CMS Portal (React + Tailwind)</h3>
+              <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
+                A state-of-the-art visual editor inspired by modern design tools. You hover over elements in the preview iframe, 
+                and they highlight. Click the pencil icon, edit in the sidebar panel, save—and watch your changes appear instantly.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">2. The Unified Server (Bun + Azure)</h3>
+              <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
+                Instead of running 5 separate dev servers, I built one consolidated Bun server that hosts all apps under 
+                a single domain, stores content in JSON files, and scales from 0 to 3 replicas based on traffic (scale-to-zero = near-zero cost).
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">3. The Framework-Agnostic SDK</h3>
+              <p class="leading-relaxed" style="color: var(--theme-text-secondary);">
+                The heart of the system. Zero dependencies in the core. Works with React, Angular, or any framework. 
+                The SDK loads all content in a single JSON file per page—not 100 individual API calls like third-party tools.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">The Features</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-start">
+              <span class="text-2xl mr-3">✅</span>
+              <div>
+                <h3 class="font-bold mb-1" style="color: var(--theme-text-primary);">Multi-App Content Management</h3>
+                <p class="text-sm" style="color: var(--theme-text-tertiary);">Manage 4 apps from a single CMS</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <span class="text-2xl mr-3">✅</span>
+              <div>
+                <h3 class="font-bold mb-1" style="color: var(--theme-text-primary);">Multi-Language Support</h3>
+                <p class="text-sm" style="color: var(--theme-text-tertiary);">5 languages out of the box</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <span class="text-2xl mr-3">✅</span>
+              <div>
+                <h3 class="font-bold mb-1" style="color: var(--theme-text-primary);">AI-Powered Translation</h3>
+                <p class="text-sm" style="color: var(--theme-text-tertiary);">Bulk translate with OpenAI for $0.005</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <span class="text-2xl mr-3">✅</span>
+              <div>
+                <h3 class="font-bold mb-1" style="color: var(--theme-text-primary);">Image Optimization</h3>
+                <p class="text-sm" style="color: var(--theme-text-tertiary);">Auto-generate thumbnails and WebP formats</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-6" style="color: var(--theme-text-primary);">The Tech Stack</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {['React 18', 'TypeScript', 'Tailwind CSS', 'Bun', 'Express.js', 'Zustand', 'Vite', 'Pulumi', 
+              'Azure Container Apps', 'Azure Blob', 'OpenAI API', 'Level 4 AI'].map(tech => (
+              <div 
+                class="rounded-lg px-4 py-2 text-center text-sm font-medium border"
+                style="background: var(--theme-card-hover); color: var(--theme-text-primary); border-color: var(--theme-card-border);"
+              >
+                {tech}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- AI Development Story -->
+        <div 
+          class="rounded-2xl p-8 border"
+          style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient2)); border-color: var(--theme-card-border);"
+        >
+          <h2 class="text-3xl font-bold mb-4" style="color: var(--theme-text-primary);">The AI Development Story: Level 4</h2>
+          <p class="leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
+            I built this entire system—SDK, CMS, server, deployment infrastructure—in <strong style="color: var(--theme-text-primary);">2 days (32 working hours)</strong> using 
+            what I call <strong style="color: var(--theme-text-primary);">Level 4 AI development</strong>.
+          </p>
+          <p class="leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
+            Level 4 means you write comprehensive specifications, and AI implements them. I spent 4 hours writing specs, 
+            and AI wrote 90% of the code in 28 hours. This is requirement-driven development at its finest.
+          </p>
+          <div 
+            class="rounded-xl p-6 mt-6"
+            style="background: var(--theme-card-bg);"
+          >
+            <h3 class="font-bold mb-3" style="color: var(--theme-text-primary);">What Made Level 4 Work</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="mr-2" style="color: var(--theme-primary-from);">✓</span>
+                <span style="color: var(--theme-text-secondary);">Clear domain: CMS is a well-understood problem</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-2" style="color: var(--theme-primary-from);">✓</span>
+                <span style="color: var(--theme-text-secondary);">Comprehensive specs with acceptance criteria</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-2" style="color: var(--theme-primary-from);">✓</span>
+                <span style="color: var(--theme-text-secondary);">Modular architecture: SDK, CMS, Server are independent</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-2" style="color: var(--theme-primary-from);">✓</span>
+                <span style="color: var(--theme-text-secondary);">Phase-by-phase validation and testing</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div 
+          class="rounded-2xl p-10 text-white text-center"
+          style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from));"
+        >
+          <h2 class="text-3xl font-bold mb-4">Try ContentFlow CMS</h2>
+          <p class="text-white/90 mb-6 max-w-2xl mx-auto">
+            Experience the system in action. Built in 2 days, deployed on Azure, and serving content 
+            for multiple production apps.
+          </p>
+          <a 
+            href="https://contentflow-app.salmonwave-4851ce16.eastus.azurecontainerapps.io/cms" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-8 py-4 bg-white rounded-full font-bold hover:scale-105 transition-all shadow-2xl"
+            style="color: var(--theme-text-primary);"
+          >
+            Launch Live Demo →
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div 
+        class="mt-16 pt-8 border-t flex justify-between"
+        style="border-color: var(--theme-card-border);"
+      >
+        <a 
+          href="/" 
+          class="inline-flex items-center font-medium transition-colors hover-link"
+          style="color: var(--theme-text-secondary);"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .hover-link:hover {
+    color: var(--theme-primary-from);
+  }
+</style>

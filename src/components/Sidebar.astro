@@ -1,0 +1,109 @@
+---
+export interface BlogPost {
+  title: string;
+  category: string;
+  readTime: string;
+  link: string;
+}
+
+export interface Props {
+  posts: BlogPost[];
+  totalApps?: number;
+  totalPosts?: number;
+}
+
+const { posts, totalApps = 4, totalPosts = 3 } = Astro.props;
+---
+
+<aside class="hidden lg:block w-80">
+  <div class="sticky top-24 space-y-6">
+    <!-- Blog Navigation -->
+    <div 
+      class="backdrop-blur-sm rounded-3xl shadow-xl p-7 border"
+      style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+    >
+      <h3 class="text-xl font-bold mb-5" style="color: var(--theme-text-primary);">Quick Navigation</h3>
+      <nav class="space-y-1">
+        {posts.map((post) => (
+          <a 
+            href={post.link}
+            class="sidebar-nav-item block p-4 rounded-2xl transition-all duration-300 group border border-transparent"
+          >
+            <div 
+              class="text-xs font-semibold mb-1.5 uppercase tracking-wide"
+              style="color: var(--theme-primary-from);"
+            >
+              {post.category}
+            </div>
+            <div 
+              class="text-sm font-semibold leading-snug"
+              style="color: var(--theme-text-primary);"
+            >
+              {post.title}
+            </div>
+            <div class="text-xs mt-1.5" style="color: var(--theme-text-tertiary);">{post.readTime}</div>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Apps Quick Links -->
+    <div 
+      class="rounded-3xl shadow-2xl p-7 text-white relative overflow-hidden"
+      style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from), var(--theme-accent-from));"
+    >
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent_70%)]"></div>
+      <div class="relative">
+        <h3 class="text-xl font-bold mb-3">Explore Apps</h3>
+        <p class="text-sm text-white/95 mb-5 leading-relaxed">
+          Check out the apps I've built, from iOS utilities to enterprise platforms.
+        </p>
+        <a 
+          href="/apps"
+          class="block w-full py-3.5 bg-white rounded-2xl text-center font-bold hover:scale-105 hover:shadow-xl transition-all"
+          style="color: var(--theme-text-primary);"
+        >
+          View All Apps →
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats Card -->
+    <div 
+      class="backdrop-blur-sm rounded-3xl shadow-xl p-7 border"
+      style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+    >
+      <h3 class="text-xl font-bold mb-5" style="color: var(--theme-text-primary);">Stats</h3>
+      <div class="space-y-4">
+        <div 
+          class="flex justify-between items-center p-3 rounded-xl"
+          style="background: var(--theme-card-hover);"
+        >
+          <span class="font-medium" style="color: var(--theme-text-secondary);">Total Apps</span>
+          <span class="font-bold text-2xl" style="color: var(--theme-primary-from);">{totalApps}</span>
+        </div>
+        <div 
+          class="flex justify-between items-center p-3 rounded-xl"
+          style="background: var(--theme-card-hover);"
+        >
+          <span class="font-medium" style="color: var(--theme-text-secondary);">Blog Posts</span>
+          <span class="font-bold text-2xl" style="color: var(--theme-secondary-from);">{totalPosts}</span>
+        </div>
+        <div 
+          class="flex justify-between items-center p-3 rounded-xl"
+          style="background: var(--theme-card-hover);"
+        >
+          <span class="font-medium" style="color: var(--theme-text-secondary);">Tech Stack</span>
+          <span class="font-bold text-2xl" style="color: var(--theme-accent-from);">12+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .sidebar-nav-item:hover {
+    background: var(--theme-card-hover);
+    border-color: var(--theme-card-border);
+  }
+</style>

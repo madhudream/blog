@@ -1,0 +1,147 @@
+/* Google Fonts - must be first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* Dynamic theme variables - set by ThemePicker */
+:root {
+  /* Default theme (Lavender Dream) */
+  --theme-primary-from: #9d6bff;
+  --theme-primary-to: #6d2de3;
+  --theme-secondary-from: #0ea5e9;
+  --theme-secondary-to: #0284c7;
+  --theme-accent-from: #eb6f4f;
+  --theme-accent-to: #d94f2e;
+  
+  --theme-bg-base: #fef9f5;
+  --theme-bg-gradient1: rgba(186,148,255,0.12);
+  --theme-bg-gradient2: rgba(235,111,79,0.08);
+  --theme-bg-gradient3: rgba(14,165,233,0.06);
+  
+  --theme-text-primary: #252b28;
+  --theme-text-secondary: #556059;
+  --theme-text-tertiary: #8a9691;
+  
+  --theme-card-bg: rgba(255,255,255,0.8);
+  --theme-card-border: rgba(107,120,113,0.2);
+  --theme-card-hover: rgba(157,107,255,0.1);
+}
+
+/* Theme inspired by Linear, Vercel, and Medium */
+@theme {
+  /* Custom color palette - warm, sophisticated */
+  --color-cream-50: #fefdfb;
+  --color-cream-100: #fef9f5;
+  --color-cream-200: #fdf3eb;
+  --color-cream-300: #fceee0;
+  --color-cream-400: #fae8d5;
+  --color-cream-500: #f7e2ca;
+  
+  --color-sage-50: #f6f7f6;
+  --color-sage-100: #e8ebe9;
+  --color-sage-200: #d1d7d3;
+  --color-sage-300: #b3bcb7;
+  --color-sage-400: #8a9691;
+  --color-sage-500: #6b7871;
+  --color-sage-600: #556059;
+  --color-sage-700: #424c47;
+  --color-sage-800: #333b38;
+  --color-sage-900: #252b28;
+  
+  --color-coral-50: #fef5f3;
+  --color-coral-100: #fdeae6;
+  --color-coral-200: #fbd5cd;
+  --color-coral-300: #f7b5a6;
+  --color-coral-400: #f2917a;
+  --color-coral-500: #eb6f4f;
+  --color-coral-600: #d94f2e;
+  
+  --color-lavender-50: #faf7ff;
+  --color-lavender-100: #f3edff;
+  --color-lavender-200: #e8dbff;
+  --color-lavender-300: #d5bfff;
+  --color-lavender-400: #ba94ff;
+  --color-lavender-500: #9d6bff;
+  --color-lavender-600: #8347f7;
+  --color-lavender-700: #6d2de3;
+  
+  --color-ocean-50: #f0f9ff;
+  --color-ocean-100: #e0f2fe;
+  --color-ocean-200: #bae6fd;
+  --color-ocean-300: #7dd3fc;
+  --color-ocean-400: #38bdf8;
+  --color-ocean-500: #0ea5e9;
+  --color-ocean-600: #0284c7;
+  
+  /* Font families */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fef9f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ba94ff, #9d6bff);
+  border-radius: 6px;
+  border: 3px solid #fef9f5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #9d6bff, #8347f7);
+}
+
+/* Selection color */
+::selection {
+  background-color: #e8dbff;
+  color: #4c229b;
+}
+
+/* Base text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: var(--font-sans);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(157, 107, 255, 0.3); }
+  100% { box-shadow: 0 0 30px rgba(157, 107, 255, 0.5), 0 0 60px rgba(157, 107, 255, 0.2); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}

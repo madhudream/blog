@@ -1,0 +1,59 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'fs';
+import path from 'path';
+import { marked } from 'marked';
+
+// Read the markdown content
+const contentPath = path.join(process.cwd(), 'content', 'optionmantra.md');
+const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+
+// Extract content after the first heading and table of contents
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="big-picture">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots = [
+  '/optionmantra/image1.png',
+  '/optionmantra/image2.png',
+  '/optionmantra/image3.png',
+  '/optionmantra/image4.png',
+];
+
+const tocItems = [
+  { id: 'big-picture', label: 'The Big Picture' },
+  { id: 'problem', label: 'The Problem' },
+  { id: 'vision', label: 'The Vision' },
+  { id: 'architecture', label: 'How The Pieces Fit Together' },
+  { id: 'data-shape', label: 'Data Shape & Storage' },
+  { id: 'done', label: "What's Done" },
+  { id: 'tech-stack', label: 'Tech Stack' },
+  { id: 'performance', label: 'Performance & Cost' },
+  { id: 'learnings', label: 'The Learnings' },
+  { id: 'roadmap', label: "What's Next" },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+];
+---
+
+<BlogPost
+  title="OptionMantra: VIX Data Pipeline - A Practical, Everyday Build"
+  date="March 2, 2026"
+  readTime="8 min read"
+  category="Data Engineering"
+  emoji="📊"
+  description="Building a cost-effective VIX data pipeline with Python, SQLite, and Google Cloud Storage. From $500/month to $2/month."
+  screenshots={screenshots}
+  tocItems={tocItems}
+  appLink="/app/optionmantra"
+>
+  <Fragment set:html={content} />
+</BlogPost>

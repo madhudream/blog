@@ -1,0 +1,96 @@
+---
+import AppPage from '../../layouts/AppPage.astro';
+
+const screenshots = [
+  '/wordstash/image1.png',
+  '/wordstash/image2.png',
+  '/wordstash/image3.png',
+  '/wordstash/image4.png',
+  '/wordstash/image5.png',
+];
+
+const features = [
+  '🤖 AI-powered word definitions and context',
+  '🔊 Accurate pronunciation guides',
+  '📚 Smart flashcard system for learning',
+  '☁️ Cloud sync across all devices',
+  '🎯 Personalized vocabulary tracking',
+  '📊 Progress analytics and insights',
+  '🌙 Beautiful dark mode support',
+  '📱 Native iOS experience with SwiftUI',
+];
+
+const techStack = [
+  'SwiftUI',
+  'SwiftData',
+  'Supabase',
+  'PostgreSQL',
+  'OpenAI API',
+  'CloudKit',
+  'iOS 17+',
+];
+---
+
+<AppPage
+  title="WordStash"
+  emoji="📚"
+  description="Your personal vocabulary companion. Learn new words with AI-powered definitions, pronunciation guides, and smart flashcards. Available on iOS."
+  category="Mobile App"
+  storeLink="https://apps.apple.com/wordstash"
+  screenshots={screenshots}
+  features={features}
+  techStack={techStack}
+>
+  <section class="additional-info">
+    <h2>About WordStash</h2>
+    <p>
+      WordStash transforms how you learn and remember new words. Whether you're reading 
+      a book, browsing the web, or studying for an exam, WordStash helps you build your 
+      vocabulary with intelligent AI assistance.
+    </p>
+    <p>
+      Built with native SwiftUI for a smooth iOS experience, WordStash leverages OpenAI 
+      to provide context-aware definitions, usage examples, and pronunciation guides. 
+      Your words sync seamlessly across all your devices via Supabase.
+    </p>
+    <a href="/blog/wordstash" class="read-more">Read the development story →</a>
+  </section>
+</AppPage>
+
+<style>
+  .additional-info {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .additional-info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--theme-text);
+  }
+  
+  .additional-info p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--theme-text-lighter);
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .read-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'fs';
+import path from 'path';
+import { marked } from 'marked';
+
+// Read the markdown content
+const contentPath = path.join(process.cwd(), 'content', 'contentflow.md');
+const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+
+// Extract content after the first heading and table of contents
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="problem">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots = [
+  '/contentflow/image1.png',
+  '/contentflow/image2.png',
+  '/contentflow/image3.png',
+  '/contentflow/image4.png',
+  '/contentflow/image5.png',
+  '/contentflow/image6.png',
+  '/contentflow/image7.png',
+  '/contentflow/image8.png',
+];
+
+const tocItems = [
+  { id: 'problem', label: 'The Problem' },
+  { id: 'vision', label: 'The Vision' },
+  { id: 'architecture', label: 'Architecture' },
+  { id: 'arch-comparison', label: 'Architecture Comparison' },
+  { id: 'performance', label: 'Performance Story' },
+  { id: 'cost', label: 'The Cost Story' },
+  { id: 'features', label: 'The Features' },
+  { id: 'ai-development', label: 'AI Development Story' },
+  { id: 'methodology', label: 'Development Methodology' },
+  { id: 'results', label: 'The Results' },
+  { id: 'learnings', label: 'The Learnings' },
+  { id: 'tech-stack', label: 'Tech Stack' },
+  { id: 'vision-beyond', label: 'Beyond the Code' },
+  { id: 'roadmap', label: "What's Next" },
+  { id: 'bigger-picture', label: 'The Bigger Picture' },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+  { id: 'screenshots', label: 'Screenshots' },
+];
+---
+
+<BlogPost
+  title="Building ContentFlow CMS: A Journey into AI-Powered Development"
+  date="March 2, 2026"
+  readTime="12 min read"
+  category="AI Development"
+  emoji="🚀"
+  description="How I built an entire content management system using Level 4 AI development—SDK, CMS, server, and deployment—in just 32 hours."
+  screenshots={screenshots}
+  tocItems={tocItems}
+  appLink="/app/contentflow-cms"
+>
+  <Fragment set:html={content} />
+</BlogPost>

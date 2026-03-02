@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="OptionMantra - VIX Data Pipeline">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Back Button -->
+    <a href="/" class="inline-flex items-center text-purple-400 hover:text-purple-300 mb-8 transition-colors">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Apps
+    </a>
+
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="text-6xl mb-6">📊</div>
+      <h1 class="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
+        OptionMantra
+      </h1>
+      <p class="text-xl text-slate-300 mb-6">
+        VIX Data Pipeline - A Practical, Everyday Build
+      </p>
+      <div class="flex justify-center gap-4 mb-6">
+        <span class="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30">
+          🌐 Web App
+        </span>
+        <span class="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30">
+          ✓ Published
+        </span>
+      </div>
+    </div>
+
+    <!-- Blog Content -->
+    <article class="prose prose-invert prose-lg max-w-none">
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-4 text-green-400">The Big Picture</h2>
+        <p class="text-slate-300 leading-relaxed">
+          I wanted a clean, reliable way to track VIX at 5-minute resolution without babysitting it every day. 
+          The result is a small pipeline that blends historical candles from Yahoo Finance with live quotes from 
+          Tastytrade, then stores everything in Google Cloud Storage (GCS) so it is easy to query later.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">How The Pieces Fit Together</h2>
+        
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold text-emerald-400 mb-2">1. Historical 5-minute data (Yahoo Finance)</h3>
+            <p class="text-slate-300 leading-relaxed">
+              The collector handles the 60-day intraday limit by running daily and merging results into a 
+              local SQLite database. Over time, that builds a much longer series than Yahoo alone would allow 
+              in a single pull.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-emerald-400 mb-2">2. Live VIX collection (Tastytrade)</h3>
+            <p class="text-slate-300 leading-relaxed">
+              Live quotes are pulled during market hours and shaped into the same OHLC record format so they 
+              can sit alongside the historical data.
+            </p>
+            <ul class="text-slate-300 leading-relaxed space-y-2 ml-6 mt-2">
+              <li><strong class="text-white">5-minute collector:</strong> lightweight, meant to mirror the historical schema</li>
+              <li><strong class="text-white">1-minute collector:</strong> richer, includes daily highs/lows, change %, and extra metadata</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-emerald-400 mb-2">3. Serving data from GCS</h3>
+            <p class="text-slate-300 leading-relaxed">
+              Two HTTP functions make the data easy to consume:
+            </p>
+            <ul class="text-slate-300 leading-relaxed space-y-2 ml-6 mt-2">
+              <li><strong class="text-white">Nearest match by timestamp:</strong> useful when you want the closest records around a given time</li>
+              <li><strong class="text-white">Date range query:</strong> pulls all records between two timestamps</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-emerald-400 mb-2">4. Bulk upload for historical CSVs</h3>
+            <p class="text-slate-300 leading-relaxed">
+              When you already have a CSV, this script splits it into monthly JSON files and uploads them to GCS.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">The Data Shape (5-minute OHLC)</h2>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          Everything is normalized to this structure so historical and live data can be merged cleanly:
+        </p>
+        <pre class="bg-slate-900/50 border border-slate-700 rounded-lg p-4 overflow-x-auto"><code class="text-emerald-400">{`{
+  "datetime": "YYYY-MM-DD HH:MM:SS",
+  "open": 0.0,
+  "high": 0.0,
+  "low": 0.0,
+  "close": 0.0,
+  "volume": 0
+}`}</code></pre>
+        <p class="text-slate-300 leading-relaxed mt-4">
+          When live quotes come in, <code class="text-emerald-400">open</code>, <code class="text-emerald-400">high</code>, 
+          <code class="text-emerald-400">low</code>, and <code class="text-emerald-400">close</code> are inferred from 
+          bid, ask, last, and mark to keep the series consistent.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">Storage Layout in GCS</h2>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          Partitioning by year/month keeps lookups fast and costs low:
+        </p>
+        <pre class="bg-slate-900/50 border border-slate-700 rounded-lg p-4 overflow-x-auto"><code class="text-emerald-400">{`{bucket}/YYYY/MM.json
+{bucket}/YYYY/MM_live.json
+{bucket}/live_data/YYYY/MM_livemin.json`}</code></pre>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">What Is Already Done</h2>
+        <ul class="text-slate-300 leading-relaxed space-y-2 ml-6">
+          <li>Market-hours checks so live collectors stay quiet outside the session</li>
+          <li>Monthly partitioning and deduplication for clean time series storage</li>
+          <li>Cloud Scheduler wiring for hands-off collection</li>
+          <li>Two retrieval APIs: nearest timestamp and date range</li>
+          <li>Exploration tools to inspect the full Tastytrade payload</li>
+        </ul>
+      </div>
+
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">Where This Could Go Next</h2>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          If I keep evolving this, these are the natural next steps:
+        </p>
+        <ol class="text-slate-300 leading-relaxed space-y-2 ml-6">
+          <li>Merge live JSON into the monthly historical files on a schedule</li>
+          <li>Add a small dashboard or API layer to visualize the latest VIX moves</li>
+          <li>Add tests for data shape validation and GCS I/O</li>
+        </ol>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-sm border border-green-500/30 rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">Built During My Hospital Stay</h2>
+        <p class="text-slate-300 leading-relaxed">
+          This VIX data pipeline was created in just 1 day during my 5-day hospital stay, using AI-driven development. 
+          A practical tool for options traders and market analysts.
+        </p>
+      </div>
+    </article>
+
+    <!-- CTA -->
+    <div class="mt-16 text-center">
+      <a href="/" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to All Apps
+      </a>
+    </div>
+  </div>
+</Layout>

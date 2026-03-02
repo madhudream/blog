@@ -1,0 +1,77 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  icon?: string;
+  link: string;
+  category?: string;
+  status?: string;
+}
+
+const { title, description, icon, link, category, status } = Astro.props;
+---
+
+<a 
+  href={link}
+  class="app-card group block rounded-2xl p-6 border transition-all duration-300 hover:scale-105 relative overflow-hidden"
+  style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+>
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: var(--theme-card-hover);"></div>
+  
+  <div class="relative">
+    {icon && (
+      <div 
+        class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center text-white text-2xl font-bold"
+        style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+      >
+        {icon}
+      </div>
+    )}
+    
+    {category && (
+      <div class="mb-2">
+        <span 
+          class="text-xs font-semibold uppercase tracking-wide"
+          style="color: var(--theme-primary-from);"
+        >
+          {category}
+        </span>
+      </div>
+    )}
+    
+    <h3 class="text-xl font-bold mb-2" style="color: var(--theme-text-primary);">{title}</h3>
+    
+    {description && (
+      <p class="text-sm leading-relaxed mb-4" style="color: var(--theme-text-secondary);">
+        {description}
+      </p>
+    )}
+    
+    {status && (
+      <div class="flex items-center gap-2 mt-4">
+        <span 
+          class="px-3 py-1 rounded-full text-xs font-semibold"
+          style="background: var(--theme-card-hover); color: var(--theme-primary-from);"
+        >
+          {status}
+        </span>
+      </div>
+    )}
+    
+    <div 
+      class="flex items-center gap-2 mt-4 font-semibold text-sm group-hover:gap-3 transition-all"
+      style="color: var(--theme-primary-from);"
+    >
+      View Details
+      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </div>
+  </div>
+</a>
+
+<style>
+  .app-card:hover {
+    box-shadow: 0 20px 40px var(--theme-card-hover);
+  }
+</style>
