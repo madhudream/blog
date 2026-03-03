@@ -17,7 +17,7 @@ I want to create an my app tiles page where my goal is to create as many as poss
 
 ![alt text](image.png)
 
-Add with the blessings of Bhairava and Hanuman ji on the blog.
+Add with the blessings of Bhairava Baba and Hanuman ji on the blog.
 
 
 Contact details: madhured@gmail.com
