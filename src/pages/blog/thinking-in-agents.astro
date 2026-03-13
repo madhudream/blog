@@ -1,11 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
-import fs from 'fs';
-import path from 'path';
 import { marked } from 'marked';
-
-const contentPath = path.join(process.cwd(), 'content', 'thinking_in_agents.md');
-const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+import markdownContent from '../../../content/thinking_in_agents.md?raw';
 
 // Strip the h1 title line — it's rendered by the layout header
 const lines = markdownContent.split('\n');

@@ -1,12 +1,7 @@
 ---
 import BlogPost from '../../layouts/BlogPost.astro';
-import fs from 'fs';
-import path from 'path';
 import { marked } from 'marked';
-
-// Read the markdown content
-const contentPath = path.join(process.cwd(), 'content', 'optionmantra.md');
-const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+import markdownContent from '../../../content/optionmantra.md?raw';
 
 // Extract content after the first heading and table of contents
 const lines = markdownContent.split('\n');
