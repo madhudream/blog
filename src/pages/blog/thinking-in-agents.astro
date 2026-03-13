@@ -1,0 +1,26 @@
+---
+import EssayPost from '../../layouts/EssayPost.astro';
+import fs from 'fs';
+import path from 'path';
+import { marked } from 'marked';
+
+const contentPath = path.join(process.cwd(), 'content', 'thinking_in_agents.md');
+const markdownContent = fs.readFileSync(contentPath, 'utf-8');
+
+// Strip the h1 title line — it's rendered by the layout header
+const lines = markdownContent.split('\n');
+const contentStart = lines.findIndex(l => l.startsWith('# '));
+const markdownToRender = lines.slice(contentStart + 1).join('\n');
+
+const content = await marked.parse(markdownToRender);
+---
+
+<EssayPost
+  title="Thinking in Agents: The New Mental Model Every Developer Needs"
+  date="March 13, 2026"
+  readTime="10 min read"
+  category="AI Development"
+  description="We used to write code that told computers what to do. Now we're writing code that tells agents what to think about."
+>
+  <Fragment set:html={content} />
+</EssayPost>

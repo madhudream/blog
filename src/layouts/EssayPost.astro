@@ -1,0 +1,224 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  date: string;
+  readTime: string;
+  category: string;
+  description: string;
+}
+
+const { title, date, readTime, category, description } = Astro.props;
+---
+
+<Layout title={`${title} - Madhu's Dream`}>
+  <div class="pt-16 min-h-screen">
+    <div class="max-w-2xl mx-auto px-6 sm:px-8 py-12">
+
+      <!-- Back link -->
+      <a
+        href="/"
+        class="inline-flex items-center font-medium mb-12 transition-colors hover-link"
+        style="color: var(--theme-text-secondary);"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Header -->
+      <header class="mb-14">
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
+          <span
+            class="px-3 py-1 text-white rounded-full text-xs font-semibold tracking-wide uppercase"
+            style="background: linear-gradient(135deg, var(--theme-primary-from), var(--theme-secondary-from));"
+          >
+            {category}
+          </span>
+          <time class="text-sm" style="color: var(--theme-text-tertiary);">{date}</time>
+          <span class="text-sm" style="color: var(--theme-text-tertiary);">· {readTime}</span>
+        </div>
+
+        <h1
+          class="essay-title mb-6 leading-tight font-bold"
+          style="color: var(--theme-text-primary);"
+        >
+          {title}
+        </h1>
+
+        <p class="essay-description leading-relaxed" style="color: var(--theme-text-secondary);">
+          {description}
+        </p>
+      </header>
+
+      <!-- Essay Content -->
+      <div class="essay-prose">
+        <slot />
+      </div>
+
+      <!-- Footer nav -->
+      <div
+        class="mt-16 pt-8 border-t"
+        style="border-color: var(--theme-card-border);"
+      >
+        <a
+          href="/"
+          class="inline-flex items-center font-medium transition-colors hover-link"
+          style="color: var(--theme-text-secondary);"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .hover-link:hover {
+    color: var(--theme-primary-from) !important;
+  }
+
+  .essay-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .essay-description {
+    font-size: 1.15rem;
+    font-style: italic;
+  }
+
+  /* ── Essay prose ── */
+  .essay-prose {
+    color: var(--theme-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.85;
+  }
+
+  /* Paragraphs */
+  .essay-prose p {
+    margin-bottom: 1.6rem;
+  }
+
+  /* Italic / emphasis paragraphs that open sections */
+  .essay-prose > p > em:only-child {
+    display: block;
+    font-size: 1rem;
+    color: var(--theme-text-tertiary);
+    margin-bottom: 1.6rem;
+  }
+
+  /* Headings */
+  .essay-prose h2 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--theme-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .essay-prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.9rem;
+    color: var(--theme-text-primary);
+  }
+
+  /* Bold */
+  .essay-prose strong {
+    color: var(--theme-text-primary);
+    font-weight: 600;
+  }
+
+  /* Inline code */
+  .essay-prose code {
+    background: var(--theme-card-bg);
+    border: 1px solid var(--theme-card-border);
+    padding: 0.15em 0.45em;
+    border-radius: 0.3rem;
+    font-size: 0.9em;
+  }
+
+  /* Code blocks — monospace, with slightly wider container overflow  */
+  .essay-prose pre {
+    background: var(--theme-card-bg);
+    border: 1px solid var(--theme-card-border);
+    border-radius: 0.75rem;
+    padding: 1.4rem 1.6rem;
+    margin: 2rem -1rem;   /* bleed slightly beyond text column */
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .essay-prose pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    white-space: pre;
+  }
+
+  /* Blockquotes — opening pull-quotes */
+  .essay-prose blockquote {
+    border-left: 3px solid var(--theme-primary-from);
+    margin: 2rem 0;
+    padding: 0.25rem 0 0.25rem 1.5rem;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--theme-text-primary);
+    line-height: 1.7;
+  }
+
+  .essay-prose blockquote p {
+    margin: 0;
+  }
+
+  /* HR — decorative section break */
+  .essay-prose hr {
+    border: none;
+    margin: 3rem auto;
+    text-align: center;
+  }
+
+  .essay-prose hr::after {
+    content: '· · ·';
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    color: var(--theme-text-tertiary);
+  }
+
+  /* Lists */
+  .essay-prose ul,
+  .essay-prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .essay-prose li {
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+  }
+
+  .essay-prose ul li::marker {
+    color: var(--theme-primary-from);
+  }
+
+  /* Links */
+  .essay-prose a {
+    color: var(--theme-primary-from);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .essay-prose a:hover {
+    color: var(--theme-secondary-from);
+  }
+</style>
