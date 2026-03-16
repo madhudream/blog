@@ -14,6 +14,7 @@ const blogPosts = [
     category: 'AI Development',
     image: '/thinkingAgents/image1.png',
     link: '/blog/thinking-in-agents',
+    fav: true,
   },
   {
     id: 'contentflow-cms',
@@ -24,6 +25,7 @@ const blogPosts = [
     category: 'AI Development',
     image: '/contentflow/image1.png',
     link: '/blog/contentflow-cms',
+    fav: true,
   },
   {
     id: 'sdd',
@@ -34,6 +36,7 @@ const blogPosts = [
     category: 'AI Development',
     image: '/contentflow/image2.png',
     link: '/blog/sdd',
+    fav: true,
   },
   {
     id: 'wordstash',
@@ -44,6 +47,7 @@ const blogPosts = [
     category: 'iOS Development',
     image: '/wordstash/image1.png',
     link: '/blog/wordstash',
+    fav: true,
   },
   {
     id: 'optionmantra',
@@ -54,8 +58,13 @@ const blogPosts = [
     category: 'Data Engineering',
     image: '/optionmantra/image2.png',
     link: '/blog/optionmantra',
+    fav: true,
   },
 ];
+
+const latestPosts = blogPosts.slice(0, 3);
+const latestIds = new Set(latestPosts.map(p => p.id));
+const favPosts = blogPosts.filter(p => p.fav && !latestIds.has(p.id));
 ---
 
 <Layout title="Madhu's Dream - Building 100+ Apps">
@@ -68,16 +77,32 @@ const blogPosts = [
       <div class="flex gap-12">
         <!-- Main Blog Content -->
         <div class="flex-1">
+          <!-- Latest 3 -->
           <div class="mb-14">
-            <h2 class="text-5xl font-bold mb-3" style="color: var(--theme-text-primary);">Latest Stories</h2>
-            <p class="text-lg" style="color: var(--theme-text-secondary);">Insights from building apps with AI-driven development</p>
+            <h2 class="text-5xl font-bold mb-3" style="color: var(--theme-text-primary);">Latest</h2>
+            <p class="text-lg" style="color: var(--theme-text-secondary);">Most recent stories</p>
           </div>
 
           <div class="space-y-10">
-            {blogPosts.map((post, index) => (
-              <BlogCard {...post} index={index} />
+            {latestPosts.map((post, index) => (
+              <BlogCard {...post} index={index} fav={post.fav} />
             ))}
           </div>
+
+          <!-- Favourites / Featured -->
+          {favPosts.length > 0 && (
+          <div class="mt-20">
+            <div class="mb-10 flex items-center gap-4">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" style="color: var(--theme-primary-from);"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <h2 class="text-4xl font-bold" style="color: var(--theme-text-primary);">Featured</h2>
+            </div>
+            <div class="space-y-10">
+              {favPosts.map((post, index) => (
+                <BlogCard {...post} index={index} fav={true} />
+              ))}
+            </div>
+          </div>
+          )}
 
           <!-- About Section -->
           <div 
@@ -87,10 +112,10 @@ const blogPosts = [
             <div class="absolute inset-0 opacity-30" style="background: var(--theme-card-bg);"></div>
             <div class="relative">
               <h3 class="text-4xl font-bold mb-6" style="color: var(--theme-text-primary);">My Journey</h3>
+              <!-- Personal story coming soon -->
               <p class="text-lg leading-relaxed mb-5 font-serif" style="color: var(--theme-text-secondary);">
-                After 20 years in the U.S., I have countless stories to share. Recently, during a 5-day hospital stay, 
-                I built 2 complete apps using AI-driven development. This is my mission to create 100+ apps and 
-                document the journey—sharing lessons, failures, and victories along the way.
+                During a 5-day hospital stay, I built 2 complete apps using AI-driven development. 
+                This is my mission to create 100+ apps and document the journey—sharing lessons, failures, and victories along the way.
               </p>
               <p 
                 class="italic text-xl font-serif border-l-4 pl-6 py-2 rounded-r-xl"
