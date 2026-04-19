@@ -1,0 +1,59 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { marked } from 'marked';
+import markdownContent from '../../../content/webgpullm.md?raw';
+
+// Extract content starting from the first real section
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="the-idea">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots = [
+  '/webgpullm/image1.png',
+  '/webgpullm/image2.png',
+  '/webgpullm/image3.png',
+  '/webgpullm/image4.png',
+];
+
+const tocItems = [
+  { id: 'the-idea',      label: 'The Credit Wall Problem' },
+  { id: 'why-it-fits',   label: 'TurboQuant + PLE' },
+  { id: 'the-poc',       label: '4 a.m. — The POC' },
+  { id: 'data-pipeline', label: 'Scraping the IRS' },
+  { id: 'filtering',     label: 'Filtering 3,088 PDFs' },
+  { id: 'downloading',   label: '1,421 PDFs Downloaded' },
+  { id: 'qa-generation', label: '20,000 Q&A Pairs' },
+  { id: 'finetuning',    label: 'Fine-tuning Gemma 4' },
+  { id: 'onnx-wall',     label: 'The ONNX Wall' },
+  { id: 'plan-b',        label: 'Plan B: RAG in Browser' },
+  { id: 'the-app',       label: 'The App' },
+  { id: 'deployment',    label: 'Deployment' },
+  { id: 'webview2',      label: 'Desktop: WebView2' },
+  { id: 'measuring',     label: 'Measuring' },
+  { id: 'tech-stack',    label: 'Tech Stack' },
+  { id: 'whats-next',    label: "What's Next" },
+  { id: 'final-thoughts', label: 'Final Thoughts' },
+];
+---
+
+<BlogPost
+  title="There's an LLM Running in Your Browser Right Now — No Internet, No API, No Credits"
+  date="April 2025"
+  readTime="18 min read"
+  category="WebGPU / AI"
+  emoji="🧠"
+  description="Every app shows you that 0/3 credits screen. Gemma 4's TurboQuant + PLE make it possible to run an LLM entirely in the browser — no internet after first load, no token counter, no credit wall. Here's the full build."
+  screenshots={screenshots}
+  tocItems={tocItems}
+>
+  <Fragment set:html={content} />
+</BlogPost>
