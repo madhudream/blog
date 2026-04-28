@@ -1,0 +1,55 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { marked } from 'marked';
+import markdownContent from '../../../content/frontend-llms.md?raw';
+
+// Extract content starting from the first real section
+const lines = markdownContent.split('\n');
+let contentStart = 0;
+for (let i = 0; i < lines.length; i++) {
+  if (lines[i].includes('<a id="worry">')) {
+    contentStart = i;
+    break;
+  }
+}
+const markdownToRender = lines.slice(contentStart).join('\n');
+
+// Convert markdown to HTML
+const content = await marked.parse(markdownToRender);
+
+const screenshots = [
+  '/frontend-llms/image1.png',
+  '/frontend-llms/image2.png',
+  '/frontend-llms/image3.png',
+  '/frontend-llms/image4.png',
+];
+
+const tocItems = [
+  { id: 'worry',       label: 'The Worry Underneath' },
+  { id: 'the-week',    label: 'Gemma 4 Hits Both Targets' },
+  { id: 'thin-air',    label: 'UI Out of Thin Air' },
+  { id: 'two-runtimes',label: 'Browser & Edge Runtimes' },
+  { id: 'arena',       label: 'Eight Tool-Calling Examples' },
+  { id: 'toggle',      label: 'Local-vs-Edge Toggle' },
+  { id: 'guardrails',  label: 'Guardrails as Frontend Code' },
+  { id: 'pii',         label: 'PII Stays in the Browser' },
+  { id: 'worker',      label: 'Cloudflare Worker Proxy' },
+  { id: 'thinking',    label: "Killing Gemma's Thinking Mode" },
+  { id: 'stack',       label: 'The New Frontend Stack' },
+  { id: 'frontier',    label: 'New Frontier of the Job' },
+  { id: 'final',       label: 'Final Thoughts' },
+];
+---
+
+<BlogPost
+  title="UI Out of Thin Air — What Frontend Engineers Will Actually Do After Gemma 4"
+  date="April 28, 2026"
+  readTime="14 min read"
+  category="WebGPU / AI"
+  emoji="🪄"
+  description="A lot of frontend engineers are quietly worried that Claude, v0, and Cursor are eating the job. They're worried about the wrong thing. Gemma 4 just hit two runtimes the same week — browser and edge — and the frontier of the job moved with it. UI out of thin air, on the user's GPU."
+  screenshots={screenshots}
+  tocItems={tocItems}
+>
+  <Fragment set:html={content} />
+</BlogPost>
