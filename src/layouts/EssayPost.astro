@@ -181,6 +181,55 @@ const { title, date, readTime, category, description } = Astro.props;
     margin: 0;
   }
 
+  /* Tables — scorecards, comparisons */
+  .essay-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.25rem 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .essay-prose thead th {
+    color: var(--theme-text-primary);
+    font-weight: 700;
+    text-align: right;
+    padding: 0.7rem 1rem;
+    border-bottom: 2px solid var(--theme-primary-from);
+    white-space: nowrap;
+  }
+
+  /* First column (labels) reads left-aligned */
+  .essay-prose th:first-child,
+  .essay-prose td:first-child {
+    text-align: left;
+    min-width: 11rem;
+  }
+
+  .essay-prose tbody td {
+    text-align: right;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--theme-card-border);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .essay-prose tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .essay-prose tbody tr:hover {
+    background: var(--theme-card-bg);
+  }
+
+  /* Bolded row (the winner) gets a subtle highlight */
+  .essay-prose tbody td strong {
+    color: var(--theme-primary-from);
+  }
+
   /* HR — decorative section break */
   .essay-prose hr {
     border: none;
