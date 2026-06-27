@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { topics } from '../data/topics';
+---
+
+<Layout title="Topics — Madhu's Dream">
+  <div class="pt-16 min-h-screen">
+    <section class="py-14 px-4 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-40" style="background: linear-gradient(135deg, var(--theme-bg-gradient1), transparent, var(--theme-bg-gradient2));"></div>
+      <div class="max-w-5xl mx-auto relative">
+        <h1 class="text-5xl md:text-6xl font-bold mb-3" style="color: var(--theme-text-primary);">Browse by topic</h1>
+        <p class="text-xl mb-8" style="color: var(--theme-text-secondary);">Deep-dive series, each broken into sub-blogs</p>
+
+        <!-- Topic search -->
+        <div class="relative max-w-md">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--theme-text-tertiary);">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+          </svg>
+          <input
+            id="topic-search"
+            type="text"
+            placeholder="Search topics…"
+            autocomplete="off"
+            class="w-full pl-11 pr-4 py-3 rounded-xl border text-sm outline-none"
+            style="background: var(--theme-card-bg); border-color: var(--theme-card-border); color: var(--theme-text-primary);"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div id="topic-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {topics.map((topic) => (
+          <a
+            href={`/topic/${topic.slug}`}
+            class="topic-tile group flex items-center gap-5 rounded-3xl border p-7 shadow-lg transition-all duration-300"
+            data-search={`${topic.name} ${topic.tagline}`.toLowerCase()}
+            style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
+          >
+            <div
+              class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl text-4xl"
+              style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3));"
+            >
+              {topic.emoji}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-3 mb-1">
+                <h3 class="text-2xl font-bold" style="color: var(--theme-text-primary);">{topic.name}</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold" style="background: var(--theme-card-hover); color: var(--theme-text-tertiary);">
+                  {topic.posts.length} sub-blogs
+                </span>
+              </div>
+              <p class="text-sm leading-relaxed" style="color: var(--theme-text-secondary);">{topic.tagline}</p>
+              <span class="mt-3 inline-flex items-center gap-2 text-sm font-semibold" style="color: var(--theme-primary-from);">
+                Explore {topic.name}
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <p id="topic-empty" class="hidden text-center py-16 text-lg" style="color: var(--theme-text-tertiary);">
+        No topics match your search.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    const search = document.getElementById('topic-search') as HTMLInputElement | null;
+    const tiles = Array.from(document.querySelectorAll('#topic-grid .topic-tile')) as HTMLElement[];
+    const empty = document.getElementById('topic-empty');
+
+    search?.addEventListener('input', () => {
+      const q = search.value.toLowerCase().trim();
+      let shown = 0;
+      tiles.forEach((t) => {
+        const match = (t.dataset.search || '').includes(q);
+        t.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      empty?.classList.toggle('hidden', shown > 0);
+    });
+  </script>
+</Layout>
+
+<style>
+  .topic-tile:hover {
+    transform: translateY(-4px);
+    border-color: var(--theme-primary-from);
+    box-shadow: 0 20px 40px -16px var(--theme-card-hover);
+  }
+</style>

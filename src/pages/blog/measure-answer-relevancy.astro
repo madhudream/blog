@@ -1,0 +1,22 @@
+---
+import EssayPost from '../../layouts/EssayPost.astro';
+import { marked } from 'marked';
+import markdownContent from '../../../content/measure-answer-relevancy.md?raw';
+
+// Strip YAML frontmatter + the h1 title line — both rendered by the layout header
+const lines = markdownContent.split('\n');
+const contentStart = lines.findIndex(l => l.startsWith('# '));
+const markdownToRender = lines.slice(contentStart + 1).join('\n');
+
+const content = await marked.parse(markdownToRender);
+---
+
+<EssayPost
+  title="What is Answer Relevancy?"
+  date="June 27, 2026"
+  readTime="7 min read"
+  category="Measurements"
+  description="A response can be perfectly grounded and still answer the wrong question. Relevancy catches the helpful-sounding miss."
+>
+  <Fragment set:html={content} />
+</EssayPost>

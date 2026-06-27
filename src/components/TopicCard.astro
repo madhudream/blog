@@ -1,0 +1,89 @@
+---
+// Grid card for a sub-blog inside a topic page. Mirrors the outcome-school grid:
+// big emoji art + category eyebrow + headline up top, date + excerpt below.
+export interface Props {
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  emoji: string;
+  link: string;
+  tagline?: string;
+  index?: number;
+}
+const { title, excerpt, date, readTime, category, emoji, link, tagline, index = 0 } = Astro.props;
+---
+
+<a
+  href={link}
+  class="topic-card group flex flex-col rounded-2xl border p-7 shadow-sm transition-all duration-300 animate-slide-up"
+  data-search={`${title} ${excerpt} ${category} ${tagline ?? ''}`.toLowerCase()}
+  style={`animation-delay: ${index * 0.06}s; background: var(--theme-card-bg); border-color: var(--theme-card-border);`}
+>
+  <!-- Top: emoji + eyebrow + big headline -->
+  <div class="flex items-start gap-4 mb-6">
+    <div
+      class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl text-3xl"
+      style="background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3));"
+    >
+      {emoji}
+    </div>
+    <div class="min-w-0">
+      <p class="text-xs font-bold uppercase tracking-wide mb-1" style="color: var(--theme-primary-from);">
+        Madhu's Dream
+      </p>
+      <h3
+        class="text-2xl font-extrabold leading-tight headline"
+        style="color: var(--theme-text-primary);"
+      >
+        {title}
+      </h3>
+      <p class="mt-2 text-sm font-semibold" style="color: var(--theme-secondary-from);">{category}</p>
+      {tagline && (
+        <p class="mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold"
+           style="background: var(--theme-card-hover); color: var(--theme-text-primary);">
+          💡 {tagline}
+        </p>
+      )}
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="h-px w-full mb-5" style="background: var(--theme-card-border);"></div>
+
+  <!-- Bottom: date + excerpt -->
+  <time class="text-xs font-bold uppercase tracking-wider mb-3" style="color: var(--theme-text-tertiary);">
+    {date} · {readTime}
+  </time>
+  <p class="text-base leading-relaxed line-clamp-3" style="color: var(--theme-text-secondary);">
+    {excerpt}
+  </p>
+
+  <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold read-more" style="color: var(--theme-primary-from);">
+    Read it
+    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </span>
+</a>
+
+<style>
+  .topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -16px var(--theme-card-hover);
+    border-color: var(--theme-primary-from);
+  }
+  .topic-card .headline {
+    text-decoration: underline;
+    text-decoration-color: var(--theme-primary-from);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
