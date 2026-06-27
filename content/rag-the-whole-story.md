@@ -19,18 +19,7 @@ This page is the **map**. Each section below is a one-screen, gentle explanation
 
 > 📓 **Want to check the work?** Every number below comes from one runnable notebook — the exact pipeline (OpenAI + Qdrant + BM25 + FlashRank + RAGAS), the full IRS corpus, the 50-question golden set. Open it in [Google Colab](https://colab.research.google.com/drive/19uwMujUPNRFyLRlVj06H8mKixA3mAPM9?usp=sharing) and reproduce the whole climb.
 
-## Table of contents
-
-1. [How do you actually measure a RAG system?](#how-do-you-actually-measure-a-rag-system) — the scorecard everything else leans on
-2. [What does naive RAG look like?](#what-does-naive-rag-look-like) — the honest floor we have to beat
-3. [How does chunking change RAG?](#how-does-chunking-change-rag) — the cheapest win, free
-4. [How does hybrid search work?](#how-does-hybrid-search-work) — a keyword reader, and a surprise
-5. [How does a reranker work?](#how-does-a-reranker-work) — a careful second reader that can't retrieve
-6. [How does query rewriting help (and hurt)?](#how-does-query-rewriting-help-and-hurt) — fix the question, pay forever
-7. [How does contextual retrieval work?](#how-does-contextual-retrieval-work) — the cheap fix that won
-8. [How does a semantic cache work?](#how-does-a-semantic-cache-work) — answer once, serve instantly
-9. [The whole climb, in one table](#the-whole-climb-in-one-table)
-10. [What the series is really teaching](#what-the-series-is-really-teaching)
+The whole journey is eight steps. You start naive and measure it — that's the floor. Every step after makes the same system measurably more powerful, until a Novice pipeline is a Ninja one. Here's the climb:
 
 ## The test, and the villain
 

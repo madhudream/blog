@@ -1,0 +1,182 @@
+---
+// The Novice → Ninja climb. Naive + Measure is one foundation step;
+// every step after makes the same system measurably more powerful.
+interface Step {
+  num: string;
+  emoji: string;
+  title: string;
+  rank: string;
+  link: string;
+  status?: 'done' | 'soon';
+}
+interface Group {
+  label: string;
+  steps: Step[];
+}
+
+const groups: Group[] = [
+  {
+    label: 'Foundation',
+    steps: [
+      { num: '00', emoji: '🐣', title: 'Naive RAG + Measure It', rank: 'Novice',    link: '/blog/rag-measuring-rag' },
+      { num: '01', emoji: '✂️', title: 'Chunk Smart',            rank: 'Apprentice', link: '/blog/rag-chunking' },
+    ],
+  },
+  {
+    label: 'Retrieval',
+    steps: [
+      { num: '02', emoji: '🔀', title: 'Hybrid Search',          rank: 'Journeyman',  link: '/blog/rag-hybrid-search' },
+      { num: '03', emoji: '🎯', title: 'Rerank',                 rank: 'Adept',       link: '/blog/rag-reranking' },
+      { num: '04', emoji: '🗺️', title: 'Query Transforms',       rank: 'Expert',      link: '/blog/rag-query-rewriting' },
+      { num: '05', emoji: '🧩', title: 'Contextual Retrieval',   rank: 'Master',      link: '/blog/rag-contextual-retrieval' },
+    ],
+  },
+  {
+    label: 'Production',
+    steps: [
+      { num: '06', emoji: '⚡', title: 'Semantic Cache',         rank: 'Grandmaster', link: '/blog/rag-semantic-cache' },
+      { num: '07', emoji: '🥷', title: 'Productionize',          rank: 'Ninja',       link: '#whats-next', status: 'soon' },
+    ],
+  },
+];
+---
+
+<nav class="rag-roadmap" aria-label="RAG chapter roadmap">
+  <div class="rr-head">
+    <h2 class="rr-title">RAG: Novice → Ninja 🥷</h2>
+    <p class="rr-sub">8 steps · measured every step</p>
+  </div>
+
+  {groups.map((group) => (
+    <div class="rr-group">
+      <p class="rr-group-label">{group.label}</p>
+      {group.steps.map((step) => (
+        <a href={step.link} class="rr-step">
+          <span class="rr-emoji">{step.emoji}</span>
+          <span class="rr-num">{step.num}</span>
+          <span class="rr-body">
+            <span class="rr-step-title">{step.title}</span>
+            <span class="rr-rank">{step.rank}</span>
+          </span>
+          {step.status === 'soon' ? (
+            <span class="rr-soon">soon</span>
+          ) : (
+            <svg class="rr-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6" />
+              <path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  ))}
+</nav>
+
+<style>
+  .rag-roadmap {
+    margin: 2.5rem 0 3rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--theme-card-border);
+    background: var(--theme-card-bg);
+    padding: 1.5rem 1.5rem 1rem;
+    overflow: hidden;
+  }
+
+  .rr-head {
+    padding: 0.25rem 0.25rem 1.1rem;
+    border-bottom: 1px solid var(--theme-card-border);
+    margin-bottom: 0.75rem;
+  }
+  .rr-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: var(--theme-text-primary);
+    letter-spacing: -0.01em;
+  }
+  .rr-sub {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+    color: var(--theme-text-tertiary);
+  }
+
+  .rr-group + .rr-group {
+    margin-top: 0.5rem;
+  }
+  .rr-group-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--theme-text-tertiary);
+    margin: 1.1rem 0.5rem 0.5rem;
+  }
+
+  .rr-step {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.9rem;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+  .rr-step:hover {
+    background: linear-gradient(135deg, var(--theme-bg-gradient1), var(--theme-bg-gradient3));
+    border-color: var(--theme-card-border);
+    transform: translateX(3px);
+  }
+
+  .rr-emoji {
+    font-size: 1.35rem;
+    line-height: 1;
+    width: 1.7rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .rr-num {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--theme-text-tertiary);
+    flex-shrink: 0;
+  }
+  .rr-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  .rr-step-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--theme-text-primary);
+    line-height: 1.25;
+  }
+  .rr-step:hover .rr-step-title {
+    color: var(--theme-primary-from);
+  }
+  .rr-rank {
+    font-size: 0.82rem;
+    color: var(--theme-text-tertiary);
+  }
+
+  .rr-check {
+    width: 1.4rem;
+    height: 1.4rem;
+    flex-shrink: 0;
+    color: #22c55e;
+  }
+  .rr-soon {
+    flex-shrink: 0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    color: var(--theme-text-tertiary);
+    border: 1px dashed var(--theme-card-border);
+  }
+</style>

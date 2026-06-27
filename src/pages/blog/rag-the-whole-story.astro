@@ -1,5 +1,6 @@
 ---
-import EssayPost from '../../layouts/EssayPost.astro';
+import BlogPost from '../../layouts/BlogPost.astro';
+import RagRoadmap from '../../components/RagRoadmap.astro';
 import { marked } from 'marked';
 import markdownContent from '../../../content/rag-the-whole-story.md?raw';
 
@@ -8,7 +9,7 @@ const lines = markdownContent.split('\n');
 const contentStart = lines.findIndex(l => l.startsWith('# '));
 const markdownToRender = lines.slice(contentStart + 1).join('\n');
 
-// GitHub-style slugs on headings so the table-of-contents anchors jump correctly.
+// GitHub-style slugs on headings so the sidebar TOC anchors jump correctly.
 const slugify = (s) =>
   s.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-');
 const renderer = new marked.Renderer();
@@ -19,14 +20,33 @@ renderer.heading = ({ tokens, depth }) => {
 };
 
 const content = await marked.parse(markdownToRender, { renderer });
+
+const tocItems = [
+  { id: 'the-test-and-the-villain',                label: 'The test & the villain' },
+  { id: 'how-do-you-actually-measure-a-rag-system', label: 'Measuring RAG' },
+  { id: 'what-does-naive-rag-look-like',           label: 'The naive baseline' },
+  { id: 'how-does-chunking-change-rag',            label: 'Chunking' },
+  { id: 'how-does-hybrid-search-work',             label: 'Hybrid search' },
+  { id: 'how-does-a-reranker-work',                label: 'Reranking' },
+  { id: 'how-does-query-rewriting-help-and-hurt',  label: 'Query rewriting' },
+  { id: 'how-does-contextual-retrieval-work',      label: 'Contextual retrieval' },
+  { id: 'how-does-a-semantic-cache-work',          label: 'Semantic caching' },
+  { id: 'the-whole-climb-in-one-table',            label: 'The full climb' },
+  { id: 'what-the-series-is-really-teaching',      label: 'What it teaches' },
+  { id: 'whats-next',                              label: "What's next" },
+];
 ---
 
-<EssayPost
+<BlogPost
   title="How RAG actually works, start to finish"
   date="June 25, 2026"
   readTime="15 min read"
   category="RAG · Overview"
-  description="The map for the whole series: a naive RAG system improved one idea at a time, every step measured on the same hard test."
+  emoji="🧗"
+  description="A gentle, chapter-by-chapter tour of Retrieval-Augmented Generation — start naive, measure it, then climb one measured step at a time from Novice to Ninja."
+  screenshots={[]}
+  tocItems={tocItems}
 >
+  <RagRoadmap />
   <Fragment set:html={content} />
-</EssayPost>
+</BlogPost>

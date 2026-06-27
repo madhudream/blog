@@ -21,8 +21,8 @@ const { title, date, readTime, category, emoji, description, screenshots, tocIte
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex gap-8">
       <!-- Table of Contents Sidebar -->
       <aside class="hidden lg:block w-64 flex-shrink-0">
-        <div 
-          class="sticky top-24 rounded-2xl p-6 border"
+        <div
+          class="sticky top-24 rounded-2xl p-6 border toc-panel"
           style="background: var(--theme-card-bg); border-color: var(--theme-card-border);"
         >
           <h3 class="font-bold mb-4 text-sm uppercase tracking-wider" style="color: var(--theme-text-primary);">
@@ -170,6 +170,26 @@ const { title, date, readTime, category, emoji, description, screenshots, tocIte
 
   .toc-link:hover {
     color: var(--theme-primary-from);
+  }
+
+  /* Keep the TOC inside the viewport on short screens; scroll within it. */
+  .toc-panel {
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* Subtle scrollbar so it doesn't fight the theme */
+  .toc-panel::-webkit-scrollbar {
+    width: 6px;
+  }
+  .toc-panel::-webkit-scrollbar-thumb {
+    background: var(--theme-card-border);
+    border-radius: 3px;
+  }
+  .toc-panel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-card-border) transparent;
   }
 
   /* Blog post specific prose styling */
