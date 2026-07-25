@@ -246,6 +246,6 @@ Ten minutes of arithmetic replaces a week of guessing:
 - **Decode ceiling ≈ bandwidth / model bytes** — the single most useful division in serving.
 - **Batching ≈ 100x throughput; output ≈ 5x input cost; self-host ≈ $0.17–1.7/M for 7B–70B** — versus $5–50/M hosted.
 
-These numbers are the "why" behind the entire [inference optimization series](/blog/llm-inference-optimization-hub): quantization shrinks the bytes, [PagedAttention](/blog/paged-attention) protects the memory, [continuous batching](/blog/continuous-batching) fills the idle math units, and the [vLLM guide](/blog/serving-llms-with-vllm) shows the whole stack running.
+These numbers are the "why" behind the entire [inference optimization series](/topic/llm-inference): quantization shrinks the bytes, [PagedAttention](/blog/paged-attention) protects the memory, [continuous batching](/blog/continuous-batching) fills the idle math units, and the [vLLM guide](/blog/serving-llms-with-vllm) shows the whole stack running.
 
 That's it for now.

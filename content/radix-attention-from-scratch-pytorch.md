@@ -243,6 +243,6 @@ None of these change the core loop. Traverse, reuse, compute, store — that is 
 
 RadixAttention, built by hand: a `CacheEntry` that pairs tokens with their KV cache, a 30-line prefix search, and a generate function that prefills only the suffix past the longest cached match. On a RAG workload it turned six full prefills into one cold start plus five ~90-percent hits, exactly as the napkin math promised — and the mixed-workload run showed the tree naturally growing one branch per document family.
 
-Same code path, three altitudes: the [KV cache from scratch](/blog/kv-cache-from-scratch-pytorch) made one request fast, this blog made *repeated* requests fast, and [SGLang](/blog/how-does-sglang-work) runs the industrial-strength version of both. The concept-level story lives in [prefix caching](/blog/prefix-caching), and the whole optimization map is in the [series hub](/blog/llm-inference-optimization-hub).
+Same code path, three altitudes: the [KV cache from scratch](/blog/kv-cache-from-scratch-pytorch) made one request fast, this blog made *repeated* requests fast, and [SGLang](/blog/how-does-sglang-work) runs the industrial-strength version of both. The concept-level story lives in [prefix caching](/blog/prefix-caching), and the whole optimization map is in the [series hub](/topic/llm-inference).
 
 That's it for now.

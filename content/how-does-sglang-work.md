@@ -223,7 +223,7 @@ When does it pay off most? When prompts share long beginnings. Our own productio
 
 ## More powerful features of SGLang
 
-SGLang is much more than RadixAttention. Briefly, in simple words — many of these appear in other modern engines too, and several have their own deep-dives in [our series](/blog/llm-inference-optimization-hub):
+SGLang is much more than RadixAttention. Briefly, in simple words — many of these appear in other modern engines too, and several have their own deep-dives in [our series](/topic/llm-inference):
 
 - **[Chunked prefill](/blog/chunked-prefill).** Long prompts are read in chunks, mixed in with decode steps, so one giant document cannot freeze everyone else's streaming.
 - **[Speculative decoding](/blog/speculative-decoding).** A small helper guesses several tokens ahead; the main model checks the guesses in one step.
