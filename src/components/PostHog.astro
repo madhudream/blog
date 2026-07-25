@@ -1,0 +1,22 @@
+---
+// PostHog web analytics — loads only in prod builds with a key set,
+// so dev/localhost traffic never pollutes the stats.
+const key = import.meta.env.PUBLIC_POSTHOG_KEY;
+const host = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
+const enabled = import.meta.env.PROD && !!key;
+---
+
+{enabled && (
+  <script is:inline define:vars={{ key, host }}>
+    (function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.src = host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js';
+      s.onload = function () {
+        window.posthog.init(key, { api_host: host, defaults: '2025-05-24' });
+      };
+      document.head.appendChild(s);
+    })();
+  </script>
+)}
