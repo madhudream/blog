@@ -165,6 +165,17 @@ export const topics: Topic[] = [
         link: '/blog/measure-answer-relevancy',
         tagline: 'Answer the actual question.',
       },
+      {
+        id: 'measure-hit-rate',
+        title: 'What is Retrieval Hit-Rate?',
+        excerpt: 'A blunt, un-foolable yes/no: did retrieval pull at least one of the documents we know the answer lives in? The deterministic counter that keeps the LLM judge honest.',
+        date: 'June 27, 2026',
+        readTime: '6 min read',
+        category: 'Deterministic counter',
+        emoji: '🥅',
+        link: '/blog/measure-hit-rate',
+        tagline: 'Did you fetch any right doc at all?',
+      },
     ],
   },
 ];

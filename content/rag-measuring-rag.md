@@ -106,7 +106,7 @@ The judge sees the question, the retrieved context, the generated response, and 
 
 An LLM judge is powerful, but it is still an LLM, and it can be wrong or be charmed by a fluent answer. We do not take its word alone. We pair the LLM-judged metrics with two cheap, *deterministic* numbers that cannot be talked into anything:
 
-- **Retrieval hit-rate** — did we pull at least one of the expected source forms? A blunt yes/no. In code it is just a set intersection between the docs we expected and the docs we retrieved — no model involved, so a persuasive answer cannot game it.
+- **[Retrieval hit-rate](/blog/measure-hit-rate)** — did we pull at least one of the expected source forms? A blunt yes/no. In code it is just a set intersection between the docs we expected and the docs we retrieved — no model involved, so a persuasive answer cannot game it.
 - **Latency** — end-to-end seconds per question. Every "improvement" in the series is weighed against what it costs here, because a 3% quality gain that triples latency is usually a bad trade.
 
 That hit-rate is computed right in the evaluation loop, alongside building the samples:

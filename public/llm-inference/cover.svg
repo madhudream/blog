@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#g)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2">
+    <rect x="40" y="70" width="120" height="80" rx="8"/>
+    <rect x="240" y="58" width="26" height="26" rx="4"/>
+    <rect x="276" y="58" width="26" height="26" rx="4"/>
+    <rect x="312" y="58" width="26" height="26" rx="4"/>
+    <rect x="240" y="136" width="98" height="40" rx="8"/>
+    <path d="M160 110 L240 71 M160 110 L240 156 M253 84 L253 136 M289 84 L289 136 M325 84 L325 136"/>
+  </g>
+  <text x="200" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#ffffff" letter-spacing="4">PREFILL · DECODE</text>
+</svg>

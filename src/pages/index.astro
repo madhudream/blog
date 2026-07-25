@@ -6,6 +6,17 @@ import Sidebar from '../components/Sidebar.astro';
 
 const blogPosts = [
   {
+    id: 'llm-inference-optimization',
+    title: 'Prefill vs Decode: LLM Inference Optimization',
+    excerpt: 'Every LLM answers in two phases: prefill reads your whole prompt in one parallel pass, decode writes the answer one token at a time. They hit opposite bottlenecks — and nearly every serving optimization (KV cache, continuous batching, speculative decoding, PagedAttention) flows from that one fact.',
+    date: 'July 5, 2026',
+    readTime: '34 min read',
+    category: 'LLM Inference',
+    image: '/llm-inference/cover.svg',
+    link: '/blog/llm-inference-optimization',
+    fav: true,
+  },
+  {
     id: 'rag-the-whole-story',
     title: 'How RAG actually works, start to finish',
     excerpt: 'We built the most naive RAG system that could possibly work, then improved it one idea at a time — measuring every step on the same hard test. Some tricks delivered, some didn\'t. The same system went from mediocre to genuinely strong, and you\'ll understand why each step did what it did.',

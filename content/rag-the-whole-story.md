@@ -106,6 +106,16 @@ Accuracy was solved; now economics. A semantic cache remembers the questions alr
 
 ## The whole climb, in one table
 
+Before the numbers, a word on what the columns *mean* — because the whole table is just five metrics moving. Four are meaning-aware scores from RAGAS, and one is a blunt deterministic counter. Each gets its own short deep-dive in the [Measurements](/topic/measurements) series:
+
+- **[Context Recall](/blog/measure-recall)** — did we even fetch the facts the answer needs? *(The ceiling on everything else.)*
+- **[Context Precision](/blog/measure-precision)** — are those facts ranked above the noise, where the model reads?
+- **[Faithfulness](/blog/measure-faithfulness)** — is the answer grounded in what we fetched, with nothing made up?
+- **[Answer Relevancy](/blog/measure-answer-relevancy)** — does it actually answer the question that was asked?
+- **[Retrieval hit-rate](/blog/measure-hit-rate)** (the `hit` column) — did retrieval pull at least one expected form? A model can't be charmed into faking this one.
+
+The last column, **latency**, is just end-to-end seconds per question — the cost we weigh every gain against. Now the climb:
+
 Every row is one chapter, one change, scored on the same 50 golden questions over the same ~1,400 forms.
 
 | layer | Recall | Precision | Faithfulness | hit | latency |
