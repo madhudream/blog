@@ -1,7 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
 import { marked } from 'marked';
-import markdownContent from '../../../content/llm-inference-optimization.md?raw';
+import markdownContent from '../../../content/radix-attention-from-scratch-pytorch.md?raw';
 
 // Strip YAML frontmatter + the h1 title line — both rendered by the layout header
 const lines = markdownContent.split('\n');
@@ -12,11 +12,11 @@ const content = await marked.parse(markdownToRender);
 ---
 
 <EssayPost
-  title="LLM Inference Optimization: The Series"
+  title="Build RadixAttention from Scratch in PyTorch"
   date="July 25, 2026"
-  readTime="4 min read"
-  category="LLM Inference"
-  description="The hub for the LLM inference optimization series. Start with Prefill vs Decode, then follow the KV cache, the metrics, and the six techniques that make each phase fast — ending with hands-on guides to vLLM and LLM Compressor."
+  readTime="9 min read"
+  category="LLM Inference · Hands-on"
+  description="SGLang's RadixAttention in ~60 lines of plain PyTorch: a cache store, a prefix search, and the four-step pattern — traverse, reuse, compute, store — measured on a real RAG workload."
 >
   <Fragment set:html={content} />
 </EssayPost>

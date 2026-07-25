@@ -7,10 +7,10 @@ import Sidebar from '../components/Sidebar.astro';
 const blogPosts = [
   {
     id: 'llm-inference-optimization',
-    title: 'Prefill vs Decode: LLM Inference Optimization',
-    excerpt: 'Every LLM answers in two phases: prefill reads your whole prompt in one parallel pass, decode writes the answer one token at a time. They hit opposite bottlenecks — and nearly every serving optimization (KV cache, continuous batching, speculative decoding, PagedAttention) flows from that one fact.',
-    date: 'July 5, 2026',
-    readTime: '34 min read',
+    title: 'LLM Inference Optimization: The Series',
+    excerpt: 'Every LLM answers in two phases: prefill reads your prompt, decode writes the answer — and nearly every serving optimization targets one of the two. The whole series in reading order: the KV cache, the metrics, six techniques, and hands-on guides to vLLM and LLM Compressor.',
+    date: 'July 25, 2026',
+    readTime: '4 min read',
     category: 'LLM Inference',
     image: '/llm-inference/cover.svg',
     link: '/blog/llm-inference-optimization',

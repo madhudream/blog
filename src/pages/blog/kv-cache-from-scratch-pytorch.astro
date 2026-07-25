@@ -1,7 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
 import { marked } from 'marked';
-import markdownContent from '../../../content/llm-inference-optimization.md?raw';
+import markdownContent from '../../../content/kv-cache-from-scratch-pytorch.md?raw';
 
 // Strip YAML frontmatter + the h1 title line — both rendered by the layout header
 const lines = markdownContent.split('\n');
@@ -12,11 +12,11 @@ const content = await marked.parse(markdownToRender);
 ---
 
 <EssayPost
-  title="LLM Inference Optimization: The Series"
+  title="Build the KV Cache from Scratch in PyTorch"
   date="July 25, 2026"
-  readTime="4 min read"
-  category="LLM Inference"
-  description="The hub for the LLM inference optimization series. Start with Prefill vs Decode, then follow the KV cache, the metrics, and the six techniques that make each phase fast — ending with hands-on guides to vLLM and LLM Compressor."
+  readTime="7 min read"
+  category="LLM Inference · Hands-on"
+  description="Write the attention formula in four lines, implement the naive decode loop, count the wasted work, then add the KV cache and watch computations collapse from quadratic to linear."
 >
   <Fragment set:html={content} />
 </EssayPost>

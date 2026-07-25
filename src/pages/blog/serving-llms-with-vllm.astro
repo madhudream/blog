@@ -1,7 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
 import { marked } from 'marked';
-import markdownContent from '../../../content/llm-inference-optimization.md?raw';
+import markdownContent from '../../../content/serving-llms-with-vllm.md?raw';
 
 // Strip YAML frontmatter + the h1 title line — both rendered by the layout header
 const lines = markdownContent.split('\n');
@@ -12,11 +12,11 @@ const content = await marked.parse(markdownToRender);
 ---
 
 <EssayPost
-  title="LLM Inference Optimization: The Series"
+  title="Serving LLMs with vLLM: A Practical Guide"
   date="July 25, 2026"
-  readTime="4 min read"
-  category="LLM Inference"
-  description="The hub for the LLM inference optimization series. Start with Prefill vs Decode, then follow the KV cache, the metrics, and the six techniques that make each phase fast — ending with hands-on guides to vLLM and LLM Compressor."
+  readTime="10 min read"
+  category="LLM Inference · Hands-on"
+  description="Launch a vLLM server, query it with the OpenAI client, watch continuous batching and prefix caching through live Prometheus metrics, and benchmark with GuideLLM and lm_eval."
 >
   <Fragment set:html={content} />
 </EssayPost>

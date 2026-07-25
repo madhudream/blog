@@ -1,7 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
 import { marked } from 'marked';
-import markdownContent from '../../../content/llm-inference-optimization.md?raw';
+import markdownContent from '../../../content/llm-compressor-quantization.md?raw';
 
 // Strip YAML frontmatter + the h1 title line — both rendered by the layout header
 const lines = markdownContent.split('\n');
@@ -12,11 +12,11 @@ const content = await marked.parse(markdownToRender);
 ---
 
 <EssayPost
-  title="LLM Inference Optimization: The Series"
+  title="Quantizing a Model with LLM Compressor"
   date="July 25, 2026"
-  readTime="4 min read"
-  category="LLM Inference"
-  description="The hub for the LLM inference optimization series. Start with Prefill vs Decode, then follow the KV cache, the metrics, and the six techniques that make each phase fast — ending with hands-on guides to vLLM and LLM Compressor."
+  readTime="8 min read"
+  category="LLM Inference · Hands-on"
+  description="Apply a GPTQ W4A16 recipe with one oneshot call, measure the size win and the perplexity cost, and serve the result directly with vLLM."
 >
   <Fragment set:html={content} />
 </EssayPost>

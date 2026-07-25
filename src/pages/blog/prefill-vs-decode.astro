@@ -1,7 +1,7 @@
 ---
 import EssayPost from '../../layouts/EssayPost.astro';
 import { marked } from 'marked';
-import markdownContent from '../../../content/llm-inference-optimization.md?raw';
+import markdownContent from '../../../content/prefill-vs-decode.md?raw';
 
 // Strip YAML frontmatter + the h1 title line — both rendered by the layout header
 const lines = markdownContent.split('\n');
@@ -12,11 +12,11 @@ const content = await marked.parse(markdownToRender);
 ---
 
 <EssayPost
-  title="LLM Inference Optimization: The Series"
+  title="Prefill vs Decode: The Two Phases of LLM Inference"
   date="July 25, 2026"
-  readTime="4 min read"
-  category="LLM Inference"
-  description="The hub for the LLM inference optimization series. Start with Prefill vs Decode, then follow the KV cache, the metrics, and the six techniques that make each phase fast — ending with hands-on guides to vLLM and LLM Compressor."
+  readTime="14 min read"
+  category="LLM Inference · Foundations"
+  description="Prefill reads your whole prompt in one compute-bound pass; decode writes the answer one memory-bound token at a time. This single split explains nearly every inference optimization."
 >
   <Fragment set:html={content} />
 </EssayPost>
