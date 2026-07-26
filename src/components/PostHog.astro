@@ -1,9 +1,9 @@
 ---
-// PostHog web analytics — loads only in prod builds with a key set,
-// so dev/localhost traffic never pollutes the stats.
-const key = import.meta.env.PUBLIC_POSTHOG_KEY;
-const host = import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
-const enabled = import.meta.env.PROD && !!key;
+// PostHog web analytics — key is a public client-side token, safe to commit.
+// Loads only in prod builds so dev/localhost traffic never pollutes the stats.
+const key = 'phc_zuEtAudUDzrpowunrdguEBnGpQkuREyakup4BtvSFth3';
+const host = 'https://us.i.posthog.com';
+const enabled = import.meta.env.PROD;
 ---
 
 {enabled && (
@@ -14,7 +14,7 @@ const enabled = import.meta.env.PROD && !!key;
       s.crossOrigin = 'anonymous';
       s.src = host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js';
       s.onload = function () {
-        window.posthog.init(key, { api_host: host, defaults: '2025-05-24' });
+        window.posthog.init(key, { api_host: host, defaults: '2026-05-30' });
       };
       document.head.appendChild(s);
     })();
