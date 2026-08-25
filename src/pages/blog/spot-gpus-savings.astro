@@ -1,0 +1,22 @@
+---
+import EssayPost from '../../layouts/EssayPost.astro';
+import { marked } from 'marked';
+import markdownContent from '../../../content/spot-gpus-savings.md?raw';
+
+// Strip YAML frontmatter + the h1 title line — both rendered by the layout header
+const lines = markdownContent.split('\n');
+const contentStart = lines.findIndex(l => l.startsWith('# '));
+const markdownToRender = lines.slice(contentStart + 1).join('\n');
+
+const content = await marked.parse(markdownToRender);
+---
+
+<EssayPost
+  title="Spot GPUs: The 60–90% Discount, and What It Costs to Earn It"
+  date="August 24, 2026"
+  readTime="9 min read"
+  category="Numbers & Scaling · Cost"
+  description="Why the same A100 has two prices, what preemption does to a serving fleet, the mixed-fleet pattern, and a real season re-priced from $229K to ~$63–105K."
+>
+  <Fragment set:html={content} />
+</EssayPost>

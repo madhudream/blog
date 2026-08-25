@@ -1,0 +1,22 @@
+---
+import EssayPost from '../../layouts/EssayPost.astro';
+import { marked } from 'marked';
+import markdownContent from '../../../content/throughput-evolution-2024-2026.md?raw';
+
+// Strip YAML frontmatter + the h1 title line — both rendered by the layout header
+const lines = markdownContent.split('\n');
+const contentStart = lines.findIndex(l => l.startsWith('# '));
+const markdownToRender = lines.slice(contentStart + 1).join('\n');
+
+const content = await marked.parse(markdownToRender);
+---
+
+<EssayPost
+  title="From 1,000 to 10,000 Tokens per Second: How Inference Evolved, 2024–2026"
+  date="August 24, 2026"
+  readTime="9 min read"
+  category="Numbers & Scaling · Industry"
+  description="How the same H100 got roughly 5x faster between 2024 and 2026 — precision, kernels, schedulers, speculative decoding, disaggregation, and MoE — and where 2026 research is pushing next."
+>
+  <Fragment set:html={content} />
+</EssayPost>
